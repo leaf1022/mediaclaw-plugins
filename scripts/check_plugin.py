@@ -32,7 +32,11 @@ def check(directory: Path) -> None:
     if not entry:
         raise PluginError("[plugin].entry 必填")
     entry_path = directory.joinpath(*entry.split("."))
-    if not (entry_path.is_file() or (entry_path / "__init__.py").is_file()):
+    if not (
+        entry_path.is_file()
+        or entry_path.with_suffix(".py").is_file()
+        or (entry_path / "__init__.py").is_file()
+    ):
         raise PluginError(f"找不到入口模块：{entry}")
 
     for path in _source_files(directory):
