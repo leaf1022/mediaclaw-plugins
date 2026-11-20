@@ -14,6 +14,7 @@ on:
   push:
     tags:
       - "*-v*"
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -24,9 +25,8 @@ concurrency:
   cancel-in-progress: false
 
 env:
-  # MediaClaw v0.50.0. The same pin as ci.yml; trakt-sync needs events 1.1,
-  # trim-media needs library segments.
-  MEDIACLAW_REF: 84095893f6d09057a25cf138d3c1099d8bd9851f
+  # MediaClaw v0.51.0. The same public upstream pin as ci.yml.
+  MEDIACLAW_REF: 395373eb3c79058ee8ce1b2077850b3c4c84ea5c
   CATALOG_TAG: catalog
 
 jobs:
@@ -62,7 +62,7 @@ jobs:
       - name: Checkout MediaClaw
         uses: actions/checkout@v4
         with:
-          repository: leaf1022/mediaclaw
+          repository: yipengfei329/movieclaw
           ref: ${{ env.MEDIACLAW_REF }}
           path: .mediaclaw
 

@@ -28,13 +28,12 @@ permissions:
   contents: read
 
 env:
-  # MediaClaw v0.50.0: adds library.items.segments / library.segments.updated
-  # (needed by trim-media) and keeps playback stopped/completed contracts 1.1
-  # (leaf1022/mediaclaw#1063) required by trakt-sync 0.3.0.
+  # MediaClaw v0.51.0: the public upstream source keeps validation reproducible
+  # without granting this repository access to the private application fork.
   # Do not float this to a branch tip.
-  MEDIACLAW_REF: 84095893f6d09057a25cf138d3c1099d8bd9851f
+  MEDIACLAW_REF: 395373eb3c79058ee8ce1b2077850b3c4c84ea5c
   # Shipped with every server release from the one after v0.39.0.
-  HOST_CONSTRAINTS_URL: https://github.com/leaf1022/mediaclaw/releases/latest/download/host-constraints.txt
+  HOST_CONSTRAINTS_URL: https://github.com/yipengfei329/movieclaw/releases/latest/download/host-constraints.txt
 
 jobs:
   catalog:
@@ -88,7 +87,7 @@ jobs:
       - name: Checkout MediaClaw
         uses: actions/checkout@v4
         with:
-          repository: leaf1022/mediaclaw
+          repository: yipengfei329/movieclaw
           ref: ${{ env.MEDIACLAW_REF }}
           path: .mediaclaw
 
@@ -143,7 +142,7 @@ jobs:
       - name: Checkout MediaClaw
         uses: actions/checkout@v4
         with:
-          repository: leaf1022/mediaclaw
+          repository: yipengfei329/movieclaw
           ref: ${{ env.MEDIACLAW_REF }}
           path: .mediaclaw
 
