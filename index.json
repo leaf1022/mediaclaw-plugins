@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "generated_at": "2026-11-20T16:51:33Z",
+  "generated_at": "2026-11-20T16:54:19Z",
   "signed": true,
   "key_id": "catalog-mediaclaw",
   "repository": "https://github.com/leaf1022/mediaclaw-plugins",
@@ -1378,6 +1378,79 @@
               "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/p115-library-v2.8.3/p115-library-2.8.3.mcplugin",
               "sha256": "9c84d985a7ec7c62552f9bf07dc4a66bea00b0e88c960322bd2f9fa8024d3b5a",
               "size": 339487
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "platform-discovery",
+      "name": "映屿",
+      "summary": "按账号同步片味的海报墙、媒体库录像厅和平台发现；支持库存播放入口、选季订阅、完整全屏屏保与有限海报缓存。",
+      "description": "按 MediaClaw 账号同步口味测试、稍后看、不感兴趣、已看过、喜欢与避重历史；官方进程内插件模式，自动合并旧浏览器档案。国家／年代／题材多选、筛选方案、探索程度、安全撤销与浏览历史均按账号同步。海报墙支持尺寸自适应、首屏优先与有限预加载，以及悬停快捷标记与手机操作入口，默认首页，全屏无缝拼贴、重测片味、跨重启恢复。详情内直接订阅：剧集可选季，明确确认后由当前登录账号创建，沿用现有订阅策略与入库路由。保留 Netflix 官网周榜和自动更新、平台热榜、随心看剧。入口 /api/v1/plugins/platform-discovery/panel。",
+      "category": "tools",
+      "author": {
+        "name": "sexyfeifan",
+        "url": null
+      },
+      "homepage": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/platform-discovery",
+      "repository": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/platform-discovery",
+      "license": "GPL-3.0-only",
+      "origin": "official",
+      "icon": {
+        "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/catalog/platform-discovery-icon-b7ef10993b583dd7.svg",
+        "sha256": "b7ef10993b583dd7afbb63ea6c7ae2e85e298cdf6385877162f682a97f3b7c96",
+        "size": 767
+      },
+      "screenshots": [],
+      "deprecated": null,
+      "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues/new?template=plugin-feedback.yml&plugin=platform-discovery",
+      "downloads": 0,
+      "latest": "0.2.1",
+      "latest_stable": "0.2.1",
+      "versions": [
+        {
+          "version": "0.2.1",
+          "prerelease": false,
+          "released_at": "2026-11-20T16:54:19Z",
+          "yanked": null,
+          "notes": "- 修复提交操作时网络中断提示直接重试的问题：明确提示结果可能已提交，应先检查状态；写请求仍不自动重试。\n- 统一发布编号为 0.2.1，保留内部标识、权限、配置字段、账号作用域、偏好、片单与缓存；历史 0.11.x 安装需手动批准切换。\n",
+          "changelog_url": "https://github.com/leaf1022/mediaclaw-plugins/releases/tag/platform-discovery-v0.2.1",
+          "source_url": "https://github.com/leaf1022/mediaclaw-plugins/tree/platform-discovery-v0.2.1/plugins/platform-discovery",
+          "readme": {
+            "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/platform-discovery-v0.2.1/plugins/platform-discovery/README.md",
+            "sha256": "0f823094f11ccf59079b535a9f02919bfd1c78ce8607bbac6ab98a4f61036c9f",
+            "size": 13088
+          },
+          "runtime": "inline",
+          "sdk": "^1.0",
+          "requires": {
+            "host-ops": "^1.0",
+            "plugin-routes": "^1.0",
+            "plugin-data": "^1.0"
+          },
+          "platforms": [
+            "any"
+          ],
+          "permissions": {
+            "operations": [
+              "discover.get-title-details",
+              "discover.filter-titles"
+            ],
+            "paths": [],
+            "network": true,
+            "callbacks": [],
+            "events": []
+          },
+          "web": true,
+          "dependencies": null,
+          "artifacts": [
+            {
+              "platform": "any",
+              "filename": "platform-discovery-0.2.1.mcplugin",
+              "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/platform-discovery-v0.2.1/platform-discovery-0.2.1.mcplugin",
+              "sha256": "81d692ef8b9171efbb93309e3f2bc9e01d7ee2f8b3bf1039afa351ed1609a993",
+              "size": 356733
             }
           ]
         }
