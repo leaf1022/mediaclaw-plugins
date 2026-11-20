@@ -70,20 +70,17 @@ jobs:
       - name: Install catalog signing dependency
         run: python3 -m pip install cryptography
 
-      - name: Load the MediaClaw format checker from main
-        run: |
-          set -euo pipefail
-          # 插件 tag 在检查器上线前已经创建，不能移动 tag；只从 main 取检查脚本，
-          # 插件清单、源码、依赖锁和 CHANGELOG 仍严格使用当前 tag 的内容。
-          git fetch origin main --depth=1
-          git show origin/main:scripts/check_plugin.py > scripts/check_plugin.py
-
       - name: Validate MediaClaw plugin
         env:
           PLUGIN_ID: ${{ steps.tag.outputs.id }}
         run: |
           set -euo pipefail
-          python3 scripts/check_plugin.py "plugins/${PLUGIN_ID}"
+          # 插件 tag 在检查器上线前已经创建，不能移动 tag；只从 main 取检查脚本到
+          # 工作树外，插件清单、源码、依赖锁和 CHANGELOG 仍严格使用当前 tag 的内容。
+          git fetch origin main --depth=1
+          checker="$(mktemp)"
+          git show origin/main:scripts/check_plugin.py > "$checker"
+          PYTHONPATH="$PWD/scripts" python3 "$checker" "plugins/${PLUGIN_ID}"
 
       - name: Pack
         id: pack
