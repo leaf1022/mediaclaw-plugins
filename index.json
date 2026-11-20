@@ -1,10 +1,93 @@
 {
   "schema": 2,
-  "generated_at": "2026-11-20T15:14:00Z",
+  "generated_at": "2026-11-20T16:44:16Z",
   "signed": true,
   "key_id": "catalog-mediaclaw",
   "repository": "https://github.com/leaf1022/mediaclaw-plugins",
   "plugins": [
+    {
+      "id": "actor-avatar",
+      "name": "演员头像补全",
+      "summary": "从 gfriends 头像库给本地视频库的演员补头像：只写 NFO 的 <thumb>，默认只预览，带台账与一键撤销。",
+      "description": "用 gfriends 头像库给本地视频库的演员补头像（在插件页面勾选库，可选 MDCx 中文译名表）：只往 NFO 写 <thumb>，再触发一次重新读取 NFO；默认只预览，可撤销。",
+      "category": "library",
+      "author": {
+        "name": "Migflyway",
+        "url": "https://github.com/Migflyway"
+      },
+      "homepage": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/actor-avatar",
+      "repository": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/actor-avatar",
+      "license": "MIT",
+      "origin": "official",
+      "icon": {
+        "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/catalog/actor-avatar-icon-dd315c31e5e13e81.svg",
+        "sha256": "dd315c31e5e13e81e617f99385e2a33e8a58302c643fbde0d41fa4018b895663",
+        "size": 437
+      },
+      "screenshots": [],
+      "deprecated": null,
+      "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues/new?template=plugin-feedback.yml&plugin=actor-avatar",
+      "downloads": 0,
+      "latest": "0.5.1",
+      "latest_stable": "0.5.1",
+      "versions": [
+        {
+          "version": "0.5.1",
+          "prerelease": false,
+          "released_at": "2026-11-20T16:44:16Z",
+          "yanked": null,
+          "notes": "- **去掉默认目标库**：以前没在插件页面勾选过、也没有 0.1.x 旧设置 `libraries` 时，会按库名「小姐姐」找库；现在不再有任何默认库。\n  没选库时定时任务、新片入库、手动运行、按番号搜索和 AI 推荐都不做任何事（不读条目、不写文件、不记运行记录），\n  只记一行日志；运行结果状态为 `no_selection`，报告里 `settings.library_source` 为 `none`，插件页面「概览」顶部提示去「设置」勾选目标媒体库。\n- **已有的勾选不受影响**：在插件页面保存过的勾选照旧生效，0.1.x `libraries` 设置的一次性迁移也和以前一样。\n  从没保存过勾选的安装（以前靠默认库名工作的）升级后需要到插件页面勾选一次目标媒体库并保存。\n",
+          "changelog_url": "https://github.com/leaf1022/mediaclaw-plugins/releases/tag/actor-avatar-v0.5.1",
+          "source_url": "https://github.com/leaf1022/mediaclaw-plugins/tree/actor-avatar-v0.5.1/plugins/actor-avatar",
+          "readme": {
+            "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/actor-avatar-v0.5.1/plugins/actor-avatar/README.md",
+            "sha256": "042f28c0534e3cb846b82f75c5ff03978b9f88d701d55e79ee7fb715a0dc4b35",
+            "size": 15921
+          },
+          "runtime": "process",
+          "sdk": "^1.0",
+          "requires": {
+            "library.items.arrived": "^1.0",
+            "scheduled-tasks": "^1.0",
+            "job-handlers": "^1.1"
+          },
+          "platforms": [
+            "any"
+          ],
+          "permissions": {
+            "operations": [
+              "app.show",
+              "library.list",
+              "library.items.list",
+              "library.items.get",
+              "library.items.refresh-metadata",
+              "jobs.show",
+              "agent:none"
+            ],
+            "paths": [
+              {
+                "path": "library",
+                "mode": "rw"
+              }
+            ],
+            "network": true,
+            "callbacks": [],
+            "events": []
+          },
+          "web": true,
+          "dependencies": null,
+          "artifacts": [
+            {
+              "platform": "any",
+              "filename": "actor-avatar-0.5.1.mcplugin",
+              "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/actor-avatar-v0.5.1/actor-avatar-0.5.1.mcplugin",
+              "sha256": "b8f0874c2b02958d2773c283488c074f9a478f98ecb7650eb747d3ffd816226d",
+              "size": 198757
+            }
+          ]
+        }
+      ]
+    },
     {
       "id": "douban-coming-notice",
       "name": "豆瓣将映",
@@ -27,7 +110,7 @@
       "screenshots": [],
       "deprecated": null,
       "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues",
-      "downloads": 0,
+      "downloads": 1,
       "latest": "1.1.0",
       "latest_stable": "1.1.0",
       "versions": [
@@ -102,7 +185,7 @@
       "screenshots": [],
       "deprecated": null,
       "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues",
-      "downloads": 0,
+      "downloads": 1,
       "latest": "1.1.0",
       "latest_stable": "1.1.0",
       "versions": [
