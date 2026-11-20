@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "generated_at": "2026-11-20T16:45:10Z",
+  "generated_at": "2026-11-20T16:45:50Z",
   "signed": true,
   "key_id": "catalog-mediaclaw",
   "repository": "https://github.com/leaf1022/mediaclaw-plugins",
@@ -167,6 +167,137 @@
               "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/cast-cn-v0.3.5/cast-cn-0.3.5.mcplugin",
               "sha256": "511451a3557f417dd257a043ceba3a3d4d06664c1cff9a185395c1ea7a7f3ac8",
               "size": 51253
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cloud-115",
+      "name": "115 网盘",
+      "summary": "把 115 网盘接进媒体库：网盘里已有的片子直接看，新片自动上传、本地自动腾空。",
+      "description": "把 115 网盘接进媒体库：扫码或浏览器 Cookie 登录，纳管已有文件夹、秒传与分片续传上传、取直链播放",
+      "category": "storage",
+      "author": {
+        "name": "MediaClaw",
+        "url": "https://github.com/leaf1022"
+      },
+      "homepage": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/cloud-115",
+      "repository": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/cloud-115",
+      "license": "GPL-3.0-or-later",
+      "origin": "official",
+      "icon": {
+        "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/catalog/cloud-115-icon-d5961310a09fa524.svg",
+        "sha256": "d5961310a09fa5242f92d64457a8a93d5561b36c0471df77f948c3423e31c00b",
+        "size": 519
+      },
+      "screenshots": [],
+      "deprecated": null,
+      "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues/new?template=plugin-feedback.yml&plugin=cloud-115",
+      "downloads": 0,
+      "latest": "0.1.0-beta.3",
+      "latest_stable": null,
+      "versions": [
+        {
+          "version": "0.1.0-beta.3",
+          "prerelease": true,
+          "released_at": "2026-11-20T16:45:50Z",
+          "yanked": null,
+          "notes": "- 整树列举带上被列目录的路径链（115 列目录的响应里本来就有，不多发请求）。配合新版 MediaClaw，网盘里有变化时\n  只重新列有变化的那个目录，不再把整个库文件夹列一遍（#986）；老版本 MediaClaw 照旧可用。\n",
+          "changelog_url": "https://github.com/leaf1022/mediaclaw-plugins/releases/tag/cloud-115-v0.1.0-beta.3",
+          "source_url": "https://github.com/leaf1022/mediaclaw-plugins/tree/cloud-115-v0.1.0-beta.3/plugins/cloud-115",
+          "readme": {
+            "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/cloud-115-v0.1.0-beta.3/plugins/cloud-115/README.md",
+            "sha256": "6498576b2d6f8c76af9b22045260ca5ff7a9afb962e583fe4e855ec43d6a5ceb",
+            "size": 1842
+          },
+          "runtime": "process",
+          "sdk": "^1.0",
+          "requires": {
+            "drive-backends": "^1.4"
+          },
+          "platforms": [
+            "any"
+          ],
+          "permissions": {
+            "operations": [],
+            "paths": [],
+            "network": true,
+            "callbacks": [],
+            "events": []
+          },
+          "web": false,
+          "dependencies": {
+            "lock": {
+              "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/cloud-115-v0.1.0-beta.3/plugins/cloud-115/requirements.lock",
+              "sha256": "df88e7575ca29c551d02f35757d6e862492ff9fe96580f1364f4fe1ef58e75be",
+              "size": 20924
+            },
+            "packages": [
+              {
+                "name": "ecdsa",
+                "version": "0.19.2",
+                "native": false
+              },
+              {
+                "name": "lz4",
+                "version": "4.4.5",
+                "native": true
+              },
+              {
+                "name": "p115cipher",
+                "version": "0.0.6",
+                "native": false
+              },
+              {
+                "name": "p115pickcode",
+                "version": "0.0.5.4",
+                "native": false
+              },
+              {
+                "name": "pycryptodome",
+                "version": "4.0.1",
+                "native": true
+              },
+              {
+                "name": "python-asynctools",
+                "version": "0.2.2",
+                "native": false
+              },
+              {
+                "name": "python-decotools",
+                "version": "0.0.4",
+                "native": false
+              },
+              {
+                "name": "python-filewrap",
+                "version": "0.3.1.1",
+                "native": false
+              },
+              {
+                "name": "python-property",
+                "version": "0.0.3",
+                "native": false
+              },
+              {
+                "name": "python-undefined",
+                "version": "0.0.4",
+                "native": false
+              },
+              {
+                "name": "six",
+                "version": "1.17.0",
+                "native": false
+              }
+            ]
+          },
+          "artifacts": [
+            {
+              "platform": "any",
+              "filename": "cloud-115-0.1.0-beta.3.mcplugin",
+              "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/cloud-115-v0.1.0-beta.3/cloud-115-0.1.0-beta.3.mcplugin",
+              "sha256": "a66a1826a82aa8f6807a63aa6b3edeca7cb54870b67801da42201b623bbc812c",
+              "size": 47445
             }
           ]
         }
