@@ -68,7 +68,7 @@ jobs:
           python-version: "3.12"
 
       - name: Install catalog signing dependency
-        run: python3 -m pip install cryptography
+        run: python3 -m pip install cryptography jsonschema
 
       - name: Validate MediaClaw plugin
         env:
