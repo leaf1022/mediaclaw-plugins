@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "generated_at": "2026-11-20T16:45:50Z",
+  "generated_at": "2026-11-20T16:46:20Z",
   "signed": true,
   "key_id": "catalog-mediaclaw",
   "repository": "https://github.com/leaf1022/mediaclaw-plugins",
@@ -298,6 +298,253 @@
               "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/cloud-115-v0.1.0-beta.3/cloud-115-0.1.0-beta.3.mcplugin",
               "sha256": "a66a1826a82aa8f6807a63aa6b3edeca7cb54870b67801da42201b623bbc812c",
               "size": 47445
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cloud-123",
+      "name": "123 云盘",
+      "summary": "接入 123 云盘：扫码或 Token 登录、目录纳管、秒传与分片续传、原文件直链。",
+      "description": "基于 MediaClaw 核心提供的云存储能力开发的 123 云盘插件，方便将本地媒体库搬到云盘，节省本地空间",
+      "category": "storage",
+      "author": {
+        "name": "zactony",
+        "url": null
+      },
+      "homepage": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/cloud-123",
+      "repository": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/cloud-123",
+      "license": "MIT",
+      "origin": "official",
+      "icon": {
+        "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/catalog/cloud-123-icon-2b200b82d15b4cc3.png",
+        "sha256": "2b200b82d15b4cc3a5535b71619be576e05478680acaa2d2bb307ad8076dcb10",
+        "size": 3971
+      },
+      "screenshots": [],
+      "deprecated": null,
+      "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues/new?template=plugin-feedback.yml&plugin=cloud-123",
+      "downloads": 0,
+      "latest": "1.0.0",
+      "latest_stable": "1.0.0",
+      "versions": [
+        {
+          "version": "1.0.0",
+          "prerelease": false,
+          "released_at": "2026-11-20T16:46:20Z",
+          "yanked": null,
+          "notes": "- 发布 1.0.0 正式版本，保留 0.1.0-beta.10 的现有功能、依赖锁和权限。\n- 加入 123 云盘官网图标，保留原始像素及透明度，并记录图片来源。\n",
+          "changelog_url": "https://github.com/leaf1022/mediaclaw-plugins/releases/tag/cloud-123-v1.0.0",
+          "source_url": "https://github.com/leaf1022/mediaclaw-plugins/tree/cloud-123-v1.0.0/plugins/cloud-123",
+          "readme": {
+            "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/cloud-123-v1.0.0/plugins/cloud-123/README.md",
+            "sha256": "bcbb0025a53f62022f0ecf269b3bdcb00a6ab6c717e35bfb511e795a1ad11d63",
+            "size": 7525
+          },
+          "runtime": "process",
+          "sdk": "^1.0",
+          "requires": {
+            "drive-backends": "^1.5",
+            "plugin-data": "^1.0"
+          },
+          "platforms": [
+            "any"
+          ],
+          "permissions": {
+            "operations": [],
+            "paths": [],
+            "network": true,
+            "callbacks": [],
+            "events": []
+          },
+          "web": false,
+          "dependencies": {
+            "lock": {
+              "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/cloud-123-v1.0.0/plugins/cloud-123/requirements.lock",
+              "sha256": "b2f5fe5fcc146230c7f1a4fc430c084e01550e1658f5d47536e02419d5473590",
+              "size": 261455
+            },
+            "packages": [
+              {
+                "name": "bitarray",
+                "version": "3.12.3",
+                "native": true
+              },
+              {
+                "name": "brotli",
+                "version": "1.2.1",
+                "native": true
+              },
+              {
+                "name": "errno2",
+                "version": "0.0.5",
+                "native": false
+              },
+              {
+                "name": "http-response",
+                "version": "0.0.9.1",
+                "native": false
+              },
+              {
+                "name": "httpx-request",
+                "version": "0.1.9.1",
+                "native": false
+              },
+              {
+                "name": "integer-tool",
+                "version": "0.0.6.1",
+                "native": false
+              },
+              {
+                "name": "iterdir",
+                "version": "0.0.10.1",
+                "native": false
+              },
+              {
+                "name": "jh2",
+                "version": "5.0.15",
+                "native": true
+              },
+              {
+                "name": "multidict",
+                "version": "7.2.0",
+                "native": true
+              },
+              {
+                "name": "orjson",
+                "version": "3.13.0",
+                "native": true
+              },
+              {
+                "name": "p123client",
+                "version": "0.0.9.4",
+                "native": false
+              },
+              {
+                "name": "propcache",
+                "version": "0.5.4",
+                "native": true
+              },
+              {
+                "name": "python-argtools",
+                "version": "0.0.4",
+                "native": false
+              },
+              {
+                "name": "python-asynctools",
+                "version": "0.2.2",
+                "native": false
+              },
+              {
+                "name": "python-cookietools",
+                "version": "0.1.5",
+                "native": false
+              },
+              {
+                "name": "python-decotools",
+                "version": "0.0.4",
+                "native": false
+              },
+              {
+                "name": "python-dicttools",
+                "version": "0.0.5",
+                "native": false
+              },
+              {
+                "name": "python-encode-uri",
+                "version": "0.0.3",
+                "native": false
+              },
+              {
+                "name": "python-ensure",
+                "version": "0.0.2",
+                "native": false
+              },
+              {
+                "name": "python-filewrap",
+                "version": "0.3.1.1",
+                "native": false
+              },
+              {
+                "name": "python-hashtools",
+                "version": "0.0.6",
+                "native": false
+              },
+              {
+                "name": "python-http-request",
+                "version": "0.1.7.2",
+                "native": false
+              },
+              {
+                "name": "python-httpfile",
+                "version": "0.0.6.1",
+                "native": false
+              },
+              {
+                "name": "python-iterutils",
+                "version": "0.3.1.1",
+                "native": false
+              },
+              {
+                "name": "python-property",
+                "version": "0.0.3",
+                "native": false
+              },
+              {
+                "name": "python-texttools",
+                "version": "0.0.6",
+                "native": false
+              },
+              {
+                "name": "python-undefined",
+                "version": "0.0.4",
+                "native": false
+              },
+              {
+                "name": "qh3",
+                "version": "2.0.4",
+                "native": true
+              },
+              {
+                "name": "socket-keepalive",
+                "version": "0.0.1",
+                "native": false
+              },
+              {
+                "name": "urllib3-future",
+                "version": "2.25.903",
+                "native": false
+              },
+              {
+                "name": "urllib3-future-request",
+                "version": "0.0.2",
+                "native": false
+              },
+              {
+                "name": "wcwidth",
+                "version": "0.9.3",
+                "native": true
+              },
+              {
+                "name": "yarl",
+                "version": "1.25.1",
+                "native": true
+              },
+              {
+                "name": "zstandard",
+                "version": "0.25.0",
+                "native": true
+              }
+            ]
+          },
+          "artifacts": [
+            {
+              "platform": "any",
+              "filename": "cloud-123-1.0.0.mcplugin",
+              "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/cloud-123-v1.0.0/cloud-123-1.0.0.mcplugin",
+              "sha256": "6b388fb554c7e4fff3fb94cc907dec3514d9aa8619cdf5c670f1e74d5ff0209c",
+              "size": 188983
             }
           ]
         }
