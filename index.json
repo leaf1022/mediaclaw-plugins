@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "generated_at": "2026-11-20T17:00:00Z",
+  "generated_at": "2026-11-20T17:00:37Z",
   "signed": true,
   "key_id": "catalog-mediaclaw",
   "repository": "https://github.com/leaf1022/mediaclaw-plugins",
@@ -1947,6 +1947,93 @@
               "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/strategy-linkage-v1.0.0/strategy-linkage-1.0.0.mcplugin",
               "sha256": "515ba1be1ba16fd19c7bd1bc09a7d735ef3606ea35d871c0df64f08b2a53eb6d",
               "size": 40686
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "trakt-sync",
+      "name": "Trakt 自动追踪",
+      "summary": "播放、已看与收藏同步到各成员的 Trakt，支持确认后的双向历史同步",
+      "description": "将 MediaClaw 播放活动自动同步到各成员绑定的 Trakt 账号",
+      "category": "tools",
+      "author": {
+        "name": "o1xhack",
+        "url": "https://github.com/o1xhack"
+      },
+      "homepage": "https://github.com/o1xhack/mediaclaw-trakt",
+      "repository": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/trakt-sync",
+      "license": "MIT",
+      "origin": "official",
+      "icon": null,
+      "screenshots": [],
+      "deprecated": null,
+      "feedback_url": "https://github.com/o1xhack/mediaclaw-trakt/issues/new",
+      "downloads": 0,
+      "latest": "0.4.0",
+      "latest_stable": "0.4.0",
+      "versions": [
+        {
+          "version": "0.4.0",
+          "prerelease": false,
+          "released_at": "2026-11-20T17:00:37Z",
+          "yanked": null,
+          "notes": "- Default foreground history creation to incremental sync, reusing the last successful scan cutoff per member, account binding and direction, including pre-upgrade batches. Add explicit full-scan buttons and show the selected range in history/details. Failed or cancelled tasks never advance the baseline.\n- Fetch incremental Trakt history from the boundary UTC minute; retain receipt deduplication. Full scans bypass unchanged-activity caching, and changed local holdings trigger a full remote reconciliation. Local catalog reads remain paginated because the host has no change cursor; backdated remote additions require an explicit full scan.\n",
+          "changelog_url": "https://github.com/leaf1022/mediaclaw-plugins/releases/tag/trakt-sync-v0.4.0",
+          "source_url": "https://github.com/leaf1022/mediaclaw-plugins/tree/trakt-sync-v0.4.0/plugins/trakt-sync",
+          "readme": {
+            "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/trakt-sync-v0.4.0/plugins/trakt-sync/README.md",
+            "sha256": "c0a32e401ba4f3cfd4d063a6ce6bbf861906c6ecfb26084b4ac4c0cd9c115f02",
+            "size": 6672
+          },
+          "runtime": "process",
+          "sdk": "^1.0",
+          "requires": {
+            "playback.started": "^2.0",
+            "playback.progress": "^1.0",
+            "playback.stopped": "^1.1",
+            "playback.completed": "^1.1",
+            "plugin-data": "^1.0",
+            "plugin-routes": "^1.0",
+            "plugin-health": "^1.0",
+            "kernel/durable-events": "^1.0",
+            "playback.marked_played": "^1.0",
+            "playback.marked_unplayed": "^1.0",
+            "library.item.favorited": "^2.0"
+          },
+          "platforms": [
+            "any"
+          ],
+          "permissions": {
+            "operations": [
+              "library.list",
+              "library.items.get",
+              "playback.sync.catalog",
+              "playback.sync.import"
+            ],
+            "paths": [],
+            "network": true,
+            "callbacks": [],
+            "events": [
+              "playback.started",
+              "playback.progress",
+              "playback.stopped",
+              "playback.completed",
+              "playback.marked_played",
+              "playback.marked_unplayed",
+              "library.item.favorited"
+            ]
+          },
+          "web": true,
+          "dependencies": null,
+          "artifacts": [
+            {
+              "platform": "any",
+              "filename": "trakt-sync-0.4.0.mcplugin",
+              "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/trakt-sync-v0.4.0/trakt-sync-0.4.0.mcplugin",
+              "sha256": "0f054242fc55823cf4124c5a423d7f1af6f96989144572610c1ec4755946fecb",
+              "size": 127032
             }
           ]
         }
