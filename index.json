@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "generated_at": "2026-11-20T16:50:57Z",
+  "generated_at": "2026-11-20T16:51:33Z",
   "signed": true,
   "key_id": "catalog-mediaclaw",
   "repository": "https://github.com/leaf1022/mediaclaw-plugins",
@@ -1299,6 +1299,85 @@
               "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/p115-import-v0.4.14/p115-import-0.4.14.mcplugin",
               "sha256": "cfd7ea63819aef8f142215ef2aa94371795c0449cfb41280e2a864e143f57b50",
               "size": 158402
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "p115-library",
+      "name": "115 网盘与 STRM 媒体库",
+      "summary": "115 网盘同步 STRM 媒体库，支持扫码登录、增量同步与剧集直链预取。",
+      "description": "115 网盘目录 → STRM：极速扫描（整树分页列出，5 万文件约 50 次请求）、未变化文件零写入、多并发写入、撞风控自动等待续跑。全部配置在自带网页：MediaClaw 左侧边栏「115网盘」（/apps/p115-library），保存即时生效、无需重启。",
+      "category": "library",
+      "author": {
+        "name": "Migflyway",
+        "url": "https://github.com/Migflyway"
+      },
+      "homepage": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/p115-library",
+      "repository": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/p115-library",
+      "license": "GPL-3.0-or-later",
+      "origin": "official",
+      "icon": {
+        "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/catalog/p115-library-icon-384bb17586bfb5b3.svg",
+        "sha256": "384bb17586bfb5b314efa8d8df75a9f812e4880c3f3549662e581f3737df487b",
+        "size": 268
+      },
+      "screenshots": [],
+      "deprecated": null,
+      "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues/new?template=plugin-feedback.yml&plugin=p115-library",
+      "downloads": 0,
+      "latest": "2.8.3",
+      "latest_stable": "2.8.3",
+      "versions": [
+        {
+          "version": "2.8.3",
+          "prerelease": false,
+          "released_at": "2026-11-20T16:51:33Z",
+          "yanked": null,
+          "notes": "- 修复：极速扫描时目录查询失败（如 115 风控返回 HTTP 405、网络异常）被误判为「目录已删除」，开启清理时会删掉该目录已生成的 STRM；现在本轮只跳过该目录且不做清理。\n- 修复：逐目录扫描的断点在同步完整跑完后仍保留，导致下次全量几乎跳过所有目录，开启清理时还会误删它们的 STRM；现在断点只用于续传中断的同步，完整跑完后自动清除，续传那一轮也不做清理。\n- 115 风控常见的 HTTP 405 改为等待冷却后自动重试，与 429/5xx 一致。\n- 控制台同步状态区的错误信息、限速原因等文字改为转义显示，不再按 HTML 解析。\n",
+          "changelog_url": "https://github.com/leaf1022/mediaclaw-plugins/releases/tag/p115-library-v2.8.3",
+          "source_url": "https://github.com/leaf1022/mediaclaw-plugins/tree/p115-library-v2.8.3/plugins/p115-library",
+          "readme": {
+            "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/p115-library-v2.8.3/plugins/p115-library/README.md",
+            "sha256": "0ce1713a61543764f1b54c9466aba94fa71a778fcf6cb520fae7123d645df816",
+            "size": 51676
+          },
+          "runtime": "process",
+          "sdk": "^1.0",
+          "requires": {
+            "host-ops": "^1.0",
+            "plugin-data": "^1.0",
+            "plugin-files": "^1.0",
+            "plugin-routes": "^1.0"
+          },
+          "platforms": [
+            "any"
+          ],
+          "permissions": {
+            "operations": [
+              "library.scan.start",
+              "library.list"
+            ],
+            "paths": [
+              {
+                "path": "library",
+                "mode": "rw"
+              }
+            ],
+            "network": true,
+            "callbacks": [],
+            "events": []
+          },
+          "web": true,
+          "dependencies": null,
+          "artifacts": [
+            {
+              "platform": "any",
+              "filename": "p115-library-2.8.3.mcplugin",
+              "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/p115-library-v2.8.3/p115-library-2.8.3.mcplugin",
+              "sha256": "9c84d985a7ec7c62552f9bf07dc4a66bea00b0e88c960322bd2f9fa8024d3b5a",
+              "size": 339487
             }
           ]
         }
