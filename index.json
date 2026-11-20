@@ -1,55 +1,82 @@
 {
-  "douban-coming-notice": {
-    "name": "豆瓣将映魔改版",
-    "description": "监控豆瓣即将开播电视剧，开播前发送提醒，临近开播自动建订阅。",
-    "labels": [
-      "订阅",
-      "提醒",
-      "豆瓣"
-    ],
-    "version": "1.0.5",
-    "icon": "",
-    "author": "MediaClaw",
-    "min_app_version": "0.8.1",
-    "api_range": {
-      "min": 3,
-      "max": 3
-    },
-    "history": {
-      "v1.0.5": "作者调整为 MediaClaw 并补充分类标签；修复「想看」字段识别、重复刷新后提醒状态丢失及历史记录键不稳定问题",
-      "v1.0.4": "修复抓取：改用豆瓣剧集-即将播出路由，兼容「想看：」字段格式，标题去除季后缀识别，支持中文季号；剧集源无想看人数时不再被阈值误拦",
-      "v1.0.3": "新增「立即运行」与「清理数据」操作；排序方式显示为中文（热度/时间）",
-      "v1.0.2": "卡片墙补全海报与分类（host.media 返回 TMDB 详情）",
-      "v1.0.1": "新增历史记录卡片页（webui.panel）",
-      "v1.0.0": "移植自 luanyi143/MoviePilot-Plugins"
-    },
-    "url": "https://github.com/leafss1022/mediaclaw-plugins/releases/download/plugin-douban-coming-notice-1.0.5/douban-coming-notice-1.0.5.zip",
-    "manifest_url": "https://github.com/leafss1022/mediaclaw-plugins/releases/download/plugin-douban-coming-notice-1.0.5/douban-coming-notice-1.0.5-manifest.json",
-    "sig_url": ""
-  },
-  "media-cover-generator": {
-    "name": "媒体库封面生成",
-    "description": "为 MediaClaw 内置媒体库生成并应用封面：四种静态风格、批量选择、定时刷新和生成记录。",
-    "labels": [
-      "工具",
-      "媒体库"
-    ],
-    "version": "0.1.3",
-    "icon": "",
-    "author": "MediaClaw",
-    "min_app_version": "0.29.1",
-    "api_range": {
-      "min": 3,
-      "max": 3
-    },
-    "history": {
-      "v0.1.3": "修复正式版封面风格示例图缺失并清理旧版迁移文案，统一使用 MediaClaw 内置示例图。",
-      "v0.1.0": "新增媒体库封面生成插件：支持按媒体库生成横向封面、定时刷新、立即更新和历史封面展示。",
-      "v0.1.1": "修复媒体库封面未应用、中文标题方块和错误示例图；新增静态/动态 GIF、WebP 封面生成支持。",
-      "v0.1.2": "接通内置媒体库封面生成和应用；精简无效设置，支持多库选择、手动封面保护和失败记录。需配套更新主程序。"
-    },
-    "url": "https://github.com/leafss1022/mediaclaw-plugins/releases/download/plugin-media-cover-generator-0.1.3/media-cover-generator-0.1.3.zip",
-    "manifest_url": "https://github.com/leafss1022/mediaclaw-plugins/releases/download/plugin-media-cover-generator-0.1.3/media-cover-generator-0.1.3-manifest.json",
-    "sig_url": ""
-  }
+  "schema": 2,
+  "generated_at": "2026-11-20T13:55:40Z",
+  "signed": true,
+  "key_id": "catalog-mediaclaw",
+  "repository": "https://github.com/leaf1022/mediaclaw-plugins",
+  "plugins": [
+    {
+      "id": "media-cover-generator",
+      "name": "媒体库封面生成",
+      "summary": "为媒体库生成四种风格的横向封面，支持定时刷新。",
+      "description": "按四种风格生成媒体库横向封面，支持定时刷新和最近生成记录；不会覆盖手动上传的封面。",
+      "category": "library",
+      "author": {
+        "name": "MediaClaw",
+        "url": "https://github.com/leaf1022"
+      },
+      "homepage": "https://github.com/leaf1022/mediaclaw-plugins",
+      "repository": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/media-cover-generator",
+      "license": "MIT",
+      "origin": "official",
+      "icon": {
+        "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/catalog/media-cover-generator-icon-70f036712076e62c.svg",
+        "sha256": "70f036712076e62ce639317bef2a38f43887c93e3e427a71d14d7f44853a52a0",
+        "size": 337
+      },
+      "screenshots": [],
+      "deprecated": null,
+      "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues",
+      "downloads": 0,
+      "latest": "1.1.0",
+      "latest_stable": "1.1.0",
+      "versions": [
+        {
+          "version": "1.1.0",
+          "prerelease": false,
+          "released_at": "2026-11-20T13:55:40Z",
+          "yanked": null,
+          "notes": "- 适配 MediaClaw 插件 SDK 1.0、定时任务服务和插件网页入口。\n- 支持全部或指定媒体库生成封面，默认保护手动上传的封面。\n- 增加最近生成记录和失败原因展示。\n",
+          "changelog_url": "https://github.com/leaf1022/mediaclaw-plugins/releases/tag/media-cover-generator-v1.1.0",
+          "source_url": "https://github.com/leaf1022/mediaclaw-plugins/tree/media-cover-generator-v1.1.0/plugins/media-cover-generator",
+          "readme": {
+            "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/media-cover-generator-v1.1.0/plugins/media-cover-generator/README.md",
+            "sha256": "6cc77b66a22849487f3da2feff396eb229f4148d0400b282cad890996692f648",
+            "size": 337
+          },
+          "runtime": "process",
+          "sdk": "^1.0",
+          "requires": {
+            "scheduled-tasks": "^1.1",
+            "plugin-data": "^1.0",
+            "plugin-routes": "^1.0"
+          },
+          "platforms": [
+            "any"
+          ],
+          "permissions": {
+            "operations": [
+              "library.list",
+              "library.cover.generate"
+            ],
+            "paths": [],
+            "network": false,
+            "callbacks": [],
+            "events": []
+          },
+          "web": true,
+          "dependencies": null,
+          "artifacts": [
+            {
+              "platform": "any",
+              "filename": "media-cover-generator-1.1.0.mcplugin",
+              "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/media-cover-generator-v1.1.0/media-cover-generator-1.1.0.mcplugin",
+              "sha256": "7fc5c303fbce9a83ffe011573fef8970038d6338b7445487b82b3acf75f5b313",
+              "size": 8570
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
