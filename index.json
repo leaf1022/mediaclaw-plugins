@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "generated_at": "2026-11-20T16:55:36Z",
+  "generated_at": "2026-11-20T16:57:54Z",
   "signed": true,
   "key_id": "catalog-mediaclaw",
   "repository": "https://github.com/leaf1022/mediaclaw-plugins",
@@ -1604,6 +1604,88 @@
               "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/pt-keepalive-v0.2.4/pt-keepalive-0.2.4.mcplugin",
               "sha256": "241b2f02d0382c35328dd0aebd3061e06c2186bd152f72e6aaabbb3d5d2dd987",
               "size": 73533
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "pt-site-pack",
+      "name": "PT岛",
+      "summary": "管理本站 PT 目录、自助适配和采集检查，汇总站点数据与任务，支持隐私分享及自动 P 龄。",
+      "description": "管理本服务器添加的 PT 站点，支持 NexusPHP 自助导入、模板与辅助适配，提供站点数据总览、任务明细、隐私分享图、浏览器身份设置与配置回退。仅管理员可见，默认不调用模型。",
+      "category": "sites",
+      "author": {
+        "name": "sexyfeifan",
+        "url": "https://github.com/sexyfeifan"
+      },
+      "homepage": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/pt-site-pack",
+      "repository": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/pt-site-pack",
+      "license": "GPL-3.0-only",
+      "origin": "official",
+      "icon": {
+        "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/catalog/pt-site-pack-icon-26c8baeb5ceda816.svg",
+        "sha256": "26c8baeb5ceda81627bc58903f0f82fcc2b73fde86cd8dbb0862896696620ed5",
+        "size": 570
+      },
+      "screenshots": [],
+      "deprecated": null,
+      "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues/new?template=plugin-feedback.yml&plugin=pt-site-pack",
+      "downloads": 0,
+      "latest": "0.2.1",
+      "latest_stable": "0.2.1",
+      "versions": [
+        {
+          "version": "0.2.1",
+          "prerelease": false,
+          "released_at": "2026-11-20T16:57:54Z",
+          "yanked": null,
+          "notes": "- 修复更换站点账号后自动签到及下次执行时间沿用旧账号当天执行标记的问题，页面和调度统一按当前账号判断。\n- 统一发布编号为 0.2.1，可从 0.1.2 或历史 0.2.0 直接升级；原账号配置、自定义适配、采集设置和维护历史继续保留。\n",
+          "changelog_url": "https://github.com/leaf1022/mediaclaw-plugins/releases/tag/pt-site-pack-v0.2.1",
+          "source_url": "https://github.com/leaf1022/mediaclaw-plugins/tree/pt-site-pack-v0.2.1/plugins/pt-site-pack",
+          "readme": {
+            "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/pt-site-pack-v0.2.1/plugins/pt-site-pack/README.md",
+            "sha256": "694469d242a5ea70c1afd4563db790329c0102684313dfa21386c63c6b6ab5a6",
+            "size": 17306
+          },
+          "runtime": "inline",
+          "sdk": "^1.0",
+          "requires": {
+            "agent": "^1.0",
+            "plugin-data": "^1.0",
+            "site-classes": "^1.0",
+            "site-data-packs": "^1.0",
+            "plugin-files": "^1.0",
+            "plugin-routes": "^1.0",
+            "host-ops": "^1.0"
+          },
+          "platforms": [
+            "any"
+          ],
+          "permissions": {
+            "operations": [
+              "site.catalog",
+              "site.list",
+              "site.stats",
+              "site.verify",
+              "search.torrents",
+              "dl.tasks",
+              "agent:none"
+            ],
+            "paths": [],
+            "network": true,
+            "callbacks": [],
+            "events": []
+          },
+          "web": true,
+          "dependencies": null,
+          "artifacts": [
+            {
+              "platform": "any",
+              "filename": "pt-site-pack-0.2.1.mcplugin",
+              "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/pt-site-pack-v0.2.1/pt-site-pack-0.2.1.mcplugin",
+              "sha256": "c8e4e6300601b7827dd05c0b65b54b5f395f1dbfe1b1dc9b5b88734117c1dffd",
+              "size": 440693
             }
           ]
         }
