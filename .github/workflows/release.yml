@@ -86,7 +86,7 @@ jobs:
           PLUGIN_ID: ${{ steps.tag.outputs.id }}
         run: |
           set -euo pipefail
-          python3 .mediaclaw/src/mediaclaw_agent/builtin-skills/mediaclaw-plugin-dev/scripts/check_plugin.py "plugins/${PLUGIN_ID}"
+          python3 .mediaclaw/src/movieclaw_agent/builtin-skills/movieclaw-plugin-dev/scripts/check_plugin.py "plugins/${PLUGIN_ID}"
 
       - name: Pack
         id: pack

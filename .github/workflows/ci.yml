@@ -111,7 +111,7 @@ jobs:
             exit 1
           fi
           read -r -a dirs <<< "$DIRS"
-          checker=".mediaclaw/src/mediaclaw_agent/builtin-skills/mediaclaw-plugin-dev/scripts/check_plugin.py"
+          checker=".mediaclaw/src/movieclaw_agent/builtin-skills/movieclaw-plugin-dev/scripts/check_plugin.py"
           for dir in "${dirs[@]}"; do
             if [[ " $LOCKS " == *" ${dir}/"* ]]; then
               echo "${dir} 声明了 [dependencies]，由 dependencies (lock check) 用新版检查器校验"
@@ -170,7 +170,7 @@ jobs:
         run: |
           set -euo pipefail
           read -r -a locks <<< "$LOCKS"
-          checker=".mediaclaw/src/mediaclaw_agent/builtin-skills/mediaclaw-plugin-dev/scripts/check_plugin.py"
+          checker=".mediaclaw/src/movieclaw_agent/builtin-skills/movieclaw-plugin-dev/scripts/check_plugin.py"
           for lock in "${locks[@]}"; do
             dir="$(dirname "$lock")"
             echo "::group::${dir}"
