@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "generated_at": "2026-11-20T17:01:11Z",
+  "generated_at": "2026-11-20T17:01:42Z",
   "signed": true,
   "key_id": "catalog-mediaclaw",
   "repository": "https://github.com/leaf1022/mediaclaw-plugins",
@@ -2122,6 +2122,80 @@
               "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/tv-home-v0.1.0/tv-home-0.1.0.mcplugin",
               "sha256": "330719aab3bc204a682d7c70f4322cf5dfdc0ef3f28cc97d46d14eb5ffadf2a0",
               "size": 1397687
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "watch-friends",
+      "name": "映迹",
+      "summary": "私人观影足迹、高清片单、多图推荐、本人跨平台已看与续播同步，以及独立授权的互联影友。",
+      "description": "观看足迹、私人片单、影视推荐、已看与续播同步、互联影友。",
+      "category": "tools",
+      "author": {
+        "name": "sexyfeifan",
+        "url": null
+      },
+      "homepage": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/watch-friends",
+      "repository": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/watch-friends",
+      "license": "GPL-3.0-only",
+      "origin": "official",
+      "icon": {
+        "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/catalog/watch-friends-icon-13126a1a8bcb625e.svg",
+        "sha256": "13126a1a8bcb625ef980454bc54e729b3f7096cce314cdd1f57bd959fc580a1a",
+        "size": 1146
+      },
+      "screenshots": [],
+      "deprecated": null,
+      "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues/new?template=plugin-feedback.yml&plugin=watch-friends",
+      "downloads": 0,
+      "latest": "0.2.1",
+      "latest_stable": "0.2.1",
+      "versions": [
+        {
+          "version": "0.2.1",
+          "prerelease": false,
+          "released_at": "2026-11-20T17:01:42Z",
+          "yanked": null,
+          "notes": "- 修复浏览器前进后退恢复缓存页面后主题不再同步的问题，恢复时重新读取宿主主题并继续监听。\n- 统一发布编号为 0.2.1，保留原观影记录、配置、好友和互联授权，无需卸载或迁移。\n",
+          "changelog_url": "https://github.com/leaf1022/mediaclaw-plugins/releases/tag/watch-friends-v0.2.1",
+          "source_url": "https://github.com/leaf1022/mediaclaw-plugins/tree/watch-friends-v0.2.1/plugins/watch-friends",
+          "readme": {
+            "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/watch-friends-v0.2.1/plugins/watch-friends/README.md",
+            "sha256": "5c486b07dd669cc6828a87ace545310fb6bde9e01122ae996300358caa28b3e9",
+            "size": 44435
+          },
+          "runtime": "inline",
+          "sdk": "^1.0",
+          "requires": {
+            "host-ops": "^1.0",
+            "plugin-routes": "^1.0",
+            "plugin-files": "^1.0"
+          },
+          "platforms": [
+            "any"
+          ],
+          "permissions": {
+            "operations": [
+              "members.list",
+              "playback.history",
+              "search.library"
+            ],
+            "paths": [],
+            "network": true,
+            "callbacks": [],
+            "events": []
+          },
+          "web": true,
+          "dependencies": null,
+          "artifacts": [
+            {
+              "platform": "any",
+              "filename": "watch-friends-0.2.1.mcplugin",
+              "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/watch-friends-v0.2.1/watch-friends-0.2.1.mcplugin",
+              "sha256": "97aa2941d0d0eafa4373f963f97cbe42bb7db0e96887aca73eded4464cd50679",
+              "size": 947418
             }
           ]
         }
