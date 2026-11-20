@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "generated_at": "2026-11-20T16:48:28Z",
+  "generated_at": "2026-11-20T16:49:04Z",
   "signed": true,
   "key_id": "catalog-mediaclaw",
   "repository": "https://github.com/leaf1022/mediaclaw-plugins",
@@ -978,6 +978,85 @@
               "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/media-cover-generator-v1.1.0/media-cover-generator-1.1.0.mcplugin",
               "sha256": "7fc5c303fbce9a83ffe011573fef8970038d6338b7445487b82b3acf75f5b313",
               "size": 8570
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "movie-voice",
+      "name": "寻映",
+      "summary": "Siri 语音找电影和剧集，纠正片名、核对库存，确认后观看或订阅。",
+      "description": "寻映配合「找电影」快捷指令使用，插件页面生成并复制 SEARCH_URL；Siri 找电影：海报、片名和年份确认；已有影片发送可打开官方 App 影片详情的原生通知，缺片由用户确认后沿用默认规则订阅。网页使用当前登录账号；通知仅发给管理员账号。",
+      "category": "tools",
+      "author": {
+        "name": "sexyfeifan",
+        "url": "https://github.com/sexyfeifan"
+      },
+      "homepage": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/movie-voice",
+      "repository": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/movie-voice",
+      "license": "见仓库许可证",
+      "origin": "official",
+      "icon": {
+        "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/catalog/movie-voice-icon-c1953e975f37137e.svg",
+        "sha256": "c1953e975f37137eb08641fa71a82b69647c009ef87f2083eeffe1d273cdf0ae",
+        "size": 746
+      },
+      "screenshots": [],
+      "deprecated": null,
+      "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues/new?template=plugin-feedback.yml&plugin=movie-voice",
+      "downloads": 0,
+      "latest": "0.2.1",
+      "latest_stable": "0.2.1",
+      "versions": [
+        {
+          "version": "0.2.1",
+          "prerelease": false,
+          "released_at": "2026-11-20T16:49:04Z",
+          "yanked": null,
+          "notes": "- 修复等待库存核对时关闭详情弹窗仍可能创建订阅的问题；关闭按钮和 Esc 均会终止尚未提交的订阅。\n- 统一发布编号为 0.2.1，保留插件标识、权限、原配置、能力链接和签名快捷指令。\n",
+          "changelog_url": "https://github.com/leaf1022/mediaclaw-plugins/releases/tag/movie-voice-v0.2.1",
+          "source_url": "https://github.com/leaf1022/mediaclaw-plugins/tree/movie-voice-v0.2.1/plugins/movie-voice",
+          "readme": {
+            "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/movie-voice-v0.2.1/plugins/movie-voice/README.md",
+            "sha256": "836f22faa5a00692a3c3df2c8eb6b57f165af7944e9dfd015d5df8b37e90041f",
+            "size": 9322
+          },
+          "runtime": "process",
+          "sdk": "^1.0",
+          "requires": {
+            "agent": "^1.0",
+            "host-ops": "^1.0",
+            "plugin-routes": "^1.0",
+            "plugin-events": "^1.0",
+            "plugin-data": "^1.0"
+          },
+          "platforms": [
+            "any"
+          ],
+          "permissions": {
+            "operations": [
+              "agent:none",
+              "library.items.get",
+              "search.library",
+              "search.titles",
+              "discover.get-title-details",
+              "subscriptions.create"
+            ],
+            "paths": [],
+            "network": true,
+            "callbacks": [],
+            "events": []
+          },
+          "web": true,
+          "dependencies": null,
+          "artifacts": [
+            {
+              "platform": "any",
+              "filename": "movie-voice-0.2.1.mcplugin",
+              "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/movie-voice-v0.2.1/movie-voice-0.2.1.mcplugin",
+              "sha256": "26fa65b57bf4d9da9c067ce6824357da82ab92620e525b287cd5f1144b7fc589",
+              "size": 168349
             }
           ]
         }
