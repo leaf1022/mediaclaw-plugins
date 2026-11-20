@@ -1,10 +1,85 @@
 {
   "schema": 2,
-  "generated_at": "2026-11-20T13:55:40Z",
+  "generated_at": "2026-11-20T13:55:58Z",
   "signed": true,
   "key_id": "catalog-mediaclaw",
   "repository": "https://github.com/leaf1022/mediaclaw-plugins",
   "plugins": [
+    {
+      "id": "douban-coming-notice",
+      "name": "豆瓣将映",
+      "summary": "追踪豆瓣即将开播剧集，自动订阅并发送开播提醒。",
+      "description": "监控豆瓣即将开播的剧集，筛选想看人数，临近开播自动订阅并发送一次提醒。",
+      "category": "sites",
+      "author": {
+        "name": "MediaClaw",
+        "url": "https://github.com/leaf1022"
+      },
+      "homepage": "https://github.com/leaf1022/mediaclaw-plugins",
+      "repository": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/douban-coming-notice",
+      "license": "MIT",
+      "origin": "official",
+      "icon": {
+        "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/catalog/douban-coming-notice-icon-10cbebcdfff0e5c5.svg",
+        "sha256": "10cbebcdfff0e5c54c3b98d0f9207d994344508d71f2dbf7c1db14d5a87abb67",
+        "size": 375
+      },
+      "screenshots": [],
+      "deprecated": null,
+      "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues",
+      "downloads": 0,
+      "latest": "1.1.0",
+      "latest_stable": "1.1.0",
+      "versions": [
+        {
+          "version": "1.1.0",
+          "prerelease": false,
+          "released_at": "2026-11-20T13:55:58Z",
+          "yanked": null,
+          "notes": "- 适配 MediaClaw 插件 SDK 1.0、事件、通知、定时任务和插件网页入口。\n- 支持豆瓣条目解析、想看人数阈值、自动订阅与单次开播提醒。\n- 对歧义标题和缺少开播日期的条目保留待确认，不自动猜测订阅目标。\n",
+          "changelog_url": "https://github.com/leaf1022/mediaclaw-plugins/releases/tag/douban-coming-notice-v1.1.0",
+          "source_url": "https://github.com/leaf1022/mediaclaw-plugins/tree/douban-coming-notice-v1.1.0/plugins/douban-coming-notice",
+          "readme": {
+            "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/douban-coming-notice-v1.1.0/plugins/douban-coming-notice/README.md",
+            "sha256": "ce77b7fd31887fdffbd294329f2fe47ac55924c4bd6b4d9e066feae18aa81e40",
+            "size": 363
+          },
+          "runtime": "process",
+          "sdk": "^1.0",
+          "requires": {
+            "scheduled-tasks": "^1.1",
+            "plugin-data": "^1.0",
+            "plugin-routes": "^1.0",
+            "plugin-events": "^1.0"
+          },
+          "platforms": [
+            "any"
+          ],
+          "permissions": {
+            "operations": [
+              "search.titles",
+              "discover.get-title-details",
+              "subscriptions.create"
+            ],
+            "paths": [],
+            "network": true,
+            "callbacks": [],
+            "events": []
+          },
+          "web": true,
+          "dependencies": null,
+          "artifacts": [
+            {
+              "platform": "any",
+              "filename": "douban-coming-notice-1.1.0.mcplugin",
+              "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/douban-coming-notice-v1.1.0/douban-coming-notice-1.1.0.mcplugin",
+              "sha256": "8379503482bf3cd4d7d5f7e344dbefed48b976057f9d1c9877ea7baf4664b5ac",
+              "size": 10769
+            }
+          ]
+        }
+      ]
+    },
     {
       "id": "media-cover-generator",
       "name": "媒体库封面生成",
