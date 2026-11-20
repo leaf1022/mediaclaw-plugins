@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "generated_at": "2026-11-20T16:44:16Z",
+  "generated_at": "2026-11-20T16:45:10Z",
   "signed": true,
   "key_id": "catalog-mediaclaw",
   "repository": "https://github.com/leaf1022/mediaclaw-plugins",
@@ -83,6 +83,90 @@
               "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/actor-avatar-v0.5.1/actor-avatar-0.5.1.mcplugin",
               "sha256": "b8f0874c2b02958d2773c283488c074f9a478f98ecb7650eb747d3ffd816226d",
               "size": 198757
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "cast-cn",
+      "name": "演职人员中文刮削",
+      "summary": "用豆瓣补齐条目详情页演职员条的中文名、中文角色和头像，只改 NFO 并触发一次刷新。",
+      "description": "用豆瓣补齐条目详情页演职员条的中文名、中文角色和头像：只改条目 NFO，再触发一次元数据刷新。",
+      "category": "library",
+      "author": {
+        "name": "anlangao",
+        "url": "https://github.com/anlan-home"
+      },
+      "homepage": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/cast-cn",
+      "repository": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/cast-cn",
+      "license": "MIT",
+      "origin": "official",
+      "icon": {
+        "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/catalog/cast-cn-icon-7ae00cc0fa4e398c.svg",
+        "sha256": "7ae00cc0fa4e398cd6e53a88128309b61792dc3288da3e1e580f095eb96dc82d",
+        "size": 655
+      },
+      "screenshots": [],
+      "deprecated": null,
+      "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues/new?template=plugin-feedback.yml&plugin=cast-cn",
+      "downloads": 0,
+      "latest": "0.3.5",
+      "latest_stable": "0.3.5",
+      "versions": [
+        {
+          "version": "0.3.5",
+          "prerelease": false,
+          "released_at": "2026-11-20T16:45:10Z",
+          "yanked": null,
+          "notes": "- 修复**多任务并发时互相饿死**：旧实现在任务内阻塞等待主程序刷新完成（最长 10 分钟），多个条目同时等待时各自占着一个执行器槽位，而它们的刷新任务又排在队列里拿不到槽位——互相等死，活动中心呈现「一直未完成」。现在创建刷新任务后**立即释放槽位**，刷新没完成就自动延迟重查（任务重试里续跑复核）；等待超过重试预算的以「已写入并触发刷新」收尾，复核延至下一轮补跑自动续验。实机验证：4 条目并发 20 秒完成（原同样场景 15 分钟死锁）。\n- 刷新任务失败或被清理时自动重建；刷新状态轮询改用 `jobs.show`（清单权限同步：`jobs.wait` → `jobs.show`）。\n",
+          "changelog_url": "https://github.com/leaf1022/mediaclaw-plugins/releases/tag/cast-cn-v0.3.5",
+          "source_url": "https://github.com/leaf1022/mediaclaw-plugins/tree/cast-cn-v0.3.5/plugins/cast-cn",
+          "readme": {
+            "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/cast-cn-v0.3.5/plugins/cast-cn/README.md",
+            "sha256": "2d4a4dbebe039c938fb932d712703c0d93c7c3942799a663ba853768ee7d7417",
+            "size": 3981
+          },
+          "runtime": "process",
+          "sdk": "^1.0",
+          "requires": {
+            "library.items.arrived": "^1.0",
+            "scheduled-tasks": "^1.0",
+            "job-handlers": "^1.1"
+          },
+          "platforms": [
+            "any"
+          ],
+          "permissions": {
+            "operations": [
+              "app.show",
+              "library.list",
+              "library.items.list",
+              "library.items.get",
+              "library.items.refresh-metadata",
+              "jobs.show",
+              "people.show",
+              "search.titles"
+            ],
+            "paths": [
+              {
+                "path": "library",
+                "mode": "rw"
+              }
+            ],
+            "network": true,
+            "callbacks": [],
+            "events": []
+          },
+          "web": true,
+          "dependencies": null,
+          "artifacts": [
+            {
+              "platform": "any",
+              "filename": "cast-cn-0.3.5.mcplugin",
+              "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/cast-cn-v0.3.5/cast-cn-0.3.5.mcplugin",
+              "sha256": "511451a3557f417dd257a043ceba3a3d4d06664c1cff9a185395c1ea7a7f3ac8",
+              "size": 51253
             }
           ]
         }
