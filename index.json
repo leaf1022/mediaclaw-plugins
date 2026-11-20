@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "generated_at": "2026-11-20T17:00:37Z",
+  "generated_at": "2026-11-20T17:01:11Z",
   "signed": true,
   "key_id": "catalog-mediaclaw",
   "repository": "https://github.com/leaf1022/mediaclaw-plugins",
@@ -2034,6 +2034,94 @@
               "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/trakt-sync-v0.4.0/trakt-sync-0.4.0.mcplugin",
               "sha256": "0f054242fc55823cf4124c5a423d7f1af6f96989144572610c1ec4755946fecb",
               "size": 127032
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "tv-home",
+      "name": "电视桌面",
+      "summary": "把厂商桌面换成 MediaClaw 桌面：开机、按主页键直达 MediaClaw 首页。",
+      "description": "把厂商桌面换成「MediaClaw 桌面」：开机、按主页键直达 MediaClaw 首页，从 MediaClaw 退出是「全部应用」。装好后对 AI 助手说「用电视桌面插件帮我给电视换桌面」，跟着引导做：电视上开调试、点允许、按主页键确认，最后关调试。不 root、不动系统分区，改动的每一步有记录、可还原。",
+      "category": "tools",
+      "author": {
+        "name": "MediaClaw",
+        "url": "https://github.com/leaf1022"
+      },
+      "homepage": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/tv-home",
+      "repository": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/tv-home",
+      "license": "见仓库许可证",
+      "origin": "official",
+      "icon": null,
+      "screenshots": [],
+      "deprecated": null,
+      "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues/new?template=plugin-feedback.yml&plugin=tv-home",
+      "downloads": 0,
+      "latest": "0.1.0",
+      "latest_stable": "0.1.0",
+      "versions": [
+        {
+          "version": "0.1.0",
+          "prerelease": false,
+          "released_at": "2026-11-20T17:01:11Z",
+          "yanked": null,
+          "notes": "- 首个版本（P1 自用闭环）。连接电视、摸底、安装 MediaClaw 与桌面壳「MediaClaw 桌面」、换默认桌面（需要时停用厂商桌面）、验证、还原、关闭调试，全部由 agent 经 `mclaw plugins tv-home …` 引导完成。\n- 换桌面与还原的顺序、防护规则沿用 cleanyourtv 踩出来的做法（MIT）：不 root、只动 /data、先写状态记录再改设备、第一次的记录不被覆盖。\n",
+          "changelog_url": "https://github.com/leaf1022/mediaclaw-plugins/releases/tag/tv-home-v0.1.0",
+          "source_url": "https://github.com/leaf1022/mediaclaw-plugins/tree/tv-home-v0.1.0/plugins/tv-home",
+          "readme": {
+            "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/tv-home-v0.1.0/plugins/tv-home/README.md",
+            "sha256": "9c23efb29d298e8dc55defcc71b77ab628811fc1164de692d73475d9e76fe71b",
+            "size": 8281
+          },
+          "runtime": "process",
+          "sdk": "^1.0",
+          "requires": {
+            "plugin-files": "^1.0",
+            "plugin-routes": "^1.0"
+          },
+          "platforms": [
+            "any"
+          ],
+          "permissions": {
+            "operations": [],
+            "paths": [],
+            "network": true,
+            "callbacks": [],
+            "events": []
+          },
+          "web": false,
+          "dependencies": {
+            "lock": {
+              "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/tv-home-v0.1.0/plugins/tv-home/requirements.lock",
+              "sha256": "7062b116fbbf6a1dc73497bc8c4c2082b9669a3d9d0bf560c9d5e09f7d625ff7",
+              "size": 884
+            },
+            "packages": [
+              {
+                "name": "adb-shell",
+                "version": "0.4.3",
+                "native": false
+              },
+              {
+                "name": "pyasn1",
+                "version": "0.6.4",
+                "native": false
+              },
+              {
+                "name": "rsa",
+                "version": "4.9.1",
+                "native": false
+              }
+            ]
+          },
+          "artifacts": [
+            {
+              "platform": "any",
+              "filename": "tv-home-0.1.0.mcplugin",
+              "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/tv-home-v0.1.0/tv-home-0.1.0.mcplugin",
+              "sha256": "330719aab3bc204a682d7c70f4322cf5dfdc0ef3f28cc97d46d14eb5ffadf2a0",
+              "size": 1397687
             }
           ]
         }
