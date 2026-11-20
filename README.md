@@ -13,7 +13,7 @@ https://github.com/leaf1022/mediaclaw-plugins/releases/download/catalog/index.js
 | 插件 | 分类 | 说明 |
 | --- | --- | --- |
 | `media-cover-generator` | 媒体库 | 生成四种风格的媒体库横向封面，支持定时刷新 |
-| `douban-coming-notice` | 站点 | 追踪豆瓣即将开播剧集，支持自动订阅和开播提醒 |
+| `douban-coming-notice` | 订阅 | 追踪豆瓣即将开播剧集，支持自动订阅和开播提醒 |
 
 ## 开发与发版
 

@@ -56,7 +56,7 @@ IMAGE_TYPES = {".svg": "image/svg+xml", ".png": "image/png", ".webp": "image/web
 
 # Fixed category ids. The app owns the labels. Order is the inference precedence:
 # the first contract in ``requires`` that maps to a category wins.
-CATEGORIES = ("storage", "downloader", "messaging", "sites", "library", "tools")
+CATEGORIES = ("storage", "downloader", "messaging", "sites", "subscription", "library", "tools")
 CATEGORY_BY_CONTRACT = {
     "drive-backends": "storage",
     "downloader-adapters": "downloader",

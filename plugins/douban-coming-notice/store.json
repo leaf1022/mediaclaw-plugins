@@ -6,7 +6,7 @@
   "summary": "追踪豆瓣即将开播剧集，自动订阅并发送开播提醒。",
   "homepage": "https://github.com/leaf1022/mediaclaw-plugins",
   "issues_url": "https://github.com/leaf1022/mediaclaw-plugins/issues",
-  "category": "sites",
+  "category": "subscription",
   "icon": "icon.svg"
 }
 

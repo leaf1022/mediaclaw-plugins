@@ -83,7 +83,7 @@
         "summary": { "type": "string", "minLength": 1, "maxLength": 60, "description": "One line for a card." },
         "description": { "type": "string", "maxLength": 500 },
         "category": {
-          "enum": ["storage", "downloader", "messaging", "sites", "library", "tools"],
+          "enum": ["storage", "downloader", "messaging", "sites", "subscription", "library", "tools"],
           "description": "store.json category, else inferred from the newest version's requires."
         },
         "author": {

@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "generated_at": "2026-11-20T13:55:58Z",
+  "generated_at": "2026-11-20T15:14:00Z",
   "signed": true,
   "key_id": "catalog-mediaclaw",
   "repository": "https://github.com/leaf1022/mediaclaw-plugins",
@@ -10,7 +10,7 @@
       "name": "豆瓣将映",
       "summary": "追踪豆瓣即将开播剧集，自动订阅并发送开播提醒。",
       "description": "监控豆瓣即将开播的剧集，筛选想看人数，临近开播自动订阅并发送一次提醒。",
-      "category": "sites",
+      "category": "subscription",
       "author": {
         "name": "MediaClaw",
         "url": "https://github.com/leaf1022"
