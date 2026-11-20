@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "generated_at": "2026-11-20T16:46:20Z",
+  "generated_at": "2026-11-20T16:46:45Z",
   "signed": true,
   "key_id": "catalog-mediaclaw",
   "repository": "https://github.com/leaf1022/mediaclaw-plugins",
@@ -620,6 +620,79 @@
               "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/douban-coming-notice-v1.1.0/douban-coming-notice-1.1.0.mcplugin",
               "sha256": "8379503482bf3cd4d7d5f7e344dbefed48b976057f9d1c9877ea7baf4664b5ac",
               "size": 10769
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "douban-hot-subscribe",
+      "name": "豆瓣热门自动订阅",
+      "summary": "豆瓣热门榜单新进榜的片自动变订阅，季号自动选，可设评分与排除词。",
+      "description": "盯住豆瓣的热门榜单（实时热门电影/剧集、口碑榜、分类榜等）：新进榜的片自动建订阅，剧集按标题里的季号订并自动续订。默认榜单里的全都订，每轮最多 5 条、没订完的下一轮接着订；库里已有的自动跳过。可调评分下限、只取前几名、排除词（综艺/短剧/预告）等口径；豆瓣条目对应多部作品或 TMDB 尚未收录的留给用户确认。",
+      "category": "library",
+      "author": {
+        "name": "Kev1nT",
+        "url": "https://github.com/Kev1nT"
+      },
+      "homepage": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/douban-hot-subscribe",
+      "repository": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/douban-hot-subscribe",
+      "license": "MIT",
+      "origin": "official",
+      "icon": null,
+      "screenshots": [],
+      "deprecated": null,
+      "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues/new?template=plugin-feedback.yml&plugin=douban-hot-subscribe",
+      "downloads": 0,
+      "latest": "1.1.0",
+      "latest_stable": "1.1.0",
+      "versions": [
+        {
+          "version": "1.1.0",
+          "prerelease": false,
+          "released_at": "2026-11-20T16:46:45Z",
+          "yanked": null,
+          "notes": "按上游 review 修正。\n\n- **修 `source_title_ref` 用错（会 400）**：原条目本身就是 `tmdb:` 引用时，`create_body` 和\n  `resolve` 把条目的 tmdb 引用塞进了 `source_title_ref`，而宿主只接受豆瓣引用，直接返回\n  400「source_title_ref 仅接受原始豆瓣 title_ref」。现在只在「原条目是豆瓣、从歧义候选里改选\n  了 TMDB」时才带，值为原豆瓣引用。\n- **第一次同步默认值改为 `since_now`**：原来默认 `history`（当前榜上的全订），装上一跑就把\n  几十条热门一次性压进订阅队列。想全订的仍可在设置里选 `history`。\n- **临时失败不再写进 `done`**：5xx、超时、鉴权过期、429 这些下一轮会重试；只有明确的 4xx\n  才算永久失败。临时失败也不占本轮预算，`remaining` 如实计入待重试的条数。\n- **季核对**：`subscriptions.create` 偶尔会「成功但把选季丢掉」（TMDB 里没这一季时），接口不\n  报错、订阅却是空的。建完订阅后拿宿主返回的 `selected_seasons` 对一遍，丢了就在日志里记一条\n  警告、并在成功提示里写明「实际没选上第 N 季，去订阅详情里手动确认」。\n- 补 `LICENSE`（MIT），`store.json` 的 `license` 由「见仓库许可证」改为 `MIT`。\n- 为 `select_titles` / `is_permanent_error` / `seasons_missing` 补单测。\n",
+          "changelog_url": "https://github.com/leaf1022/mediaclaw-plugins/releases/tag/douban-hot-subscribe-v1.1.0",
+          "source_url": "https://github.com/leaf1022/mediaclaw-plugins/tree/douban-hot-subscribe-v1.1.0/plugins/douban-hot-subscribe",
+          "readme": {
+            "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/douban-hot-subscribe-v1.1.0/plugins/douban-hot-subscribe/README.md",
+            "sha256": "e03a4e3310b52dd717e2924002de2fae432471489c8f109fb99edf24384fdd68",
+            "size": 3785
+          },
+          "runtime": "process",
+          "sdk": "^1.0",
+          "requires": {
+            "host-ops": "^1.0",
+            "plugin-data": "^1.0",
+            "plugin-routes": "^1.0",
+            "plugin-events": "^1.0",
+            "scheduled-tasks": "^1.0"
+          },
+          "platforms": [
+            "any"
+          ],
+          "permissions": {
+            "operations": [
+              "discover.list-collections",
+              "discover.browse-collection",
+              "subscriptions.create",
+              "subscriptions.list"
+            ],
+            "paths": [],
+            "network": false,
+            "callbacks": [],
+            "events": []
+          },
+          "web": false,
+          "dependencies": null,
+          "artifacts": [
+            {
+              "platform": "any",
+              "filename": "douban-hot-subscribe-1.1.0.mcplugin",
+              "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/douban-hot-subscribe-v1.1.0/douban-hot-subscribe-1.1.0.mcplugin",
+              "sha256": "db38e19ad8ae3a0a4e84a9ae01471c9b80a6add523b648d3c278768ab7834346",
+              "size": 24087
             }
           ]
         }
