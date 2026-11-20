@@ -1,0 +1,21 @@
+[plugin]
+id = "media-cover-generator"
+title = "媒体库封面生成"
+version = "1.1.0"
+entry = "media_cover_generator"
+runtime = "process"
+sdk = "^1.0"
+description = "按四种风格生成媒体库横向封面，支持定时刷新和最近生成记录；不会覆盖手动上传的封面。"
+title_localized = { en = "Library Cover Generator" }
+description_localized = { en = "Generate landscape library covers in four styles with scheduled refresh and recent history. Manually uploaded covers are never overwritten." }
+
+[requires]
+"scheduled-tasks" = "^1.1"
+"plugin-data" = "^1.0"
+"plugin-routes" = "^1.0"
+
+[permissions]
+operations = [
+  "library.list",
+  "library.cover.generate",
+]

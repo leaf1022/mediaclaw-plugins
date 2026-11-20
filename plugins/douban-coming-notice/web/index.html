@@ -1,0 +1,40 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>豆瓣将映</title>
+  <style>
+    :root { color-scheme:light dark; font-family:var(--mc-font,system-ui,sans-serif); color:var(--mc-text,#eee); }
+    *{box-sizing:border-box} body{margin:0;background:transparent} main{max-width:1120px;margin:auto;padding:28px 20px 64px}
+    h1{margin:0 0 6px;font-size:clamp(25px,4vw,38px)} h2{margin:30px 0 12px;font-size:18px}
+    .muted{color:var(--mc-text-muted,#aaa)} .panel{border:1px solid var(--mc-line,#ffffff24);border-radius:22px;background:color-mix(in srgb,var(--mc-surface,#111) 40%,transparent);backdrop-filter:blur(24px);padding:20px}
+    .row{display:flex;gap:12px;align-items:end;flex-wrap:wrap} label{display:grid;gap:7px;flex:1;min-width:150px;font-size:13px;color:var(--mc-text-muted,#aaa)}
+    input,button{font:inherit;color:var(--mc-text,#eee);border:1px solid var(--mc-line,#ffffff24);border-radius:12px;background:color-mix(in srgb,var(--mc-surface,#222) 82%,transparent);padding:11px 13px} button{cursor:pointer}
+    button.primary{border-color:transparent;background:var(--mc-accent,#6f8cff);color:#fff;font-weight:650} button:disabled{opacity:.55;cursor:wait}
+    .grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:14px}.card{overflow:hidden;border:1px solid var(--mc-line,#ffffff24);border-radius:18px;background:color-mix(in srgb,var(--mc-surface,#111) 45%,transparent)}
+    .poster{width:100%;aspect-ratio:2/3;object-fit:cover;background:color-mix(in srgb,var(--mc-text,#fff) 8%,transparent)}.body{padding:13px 14px 15px}.title{font-weight:650;font-size:16px;line-height:1.35}
+    .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:9px}.chip{font-size:12px;padding:3px 8px;border-radius:99px;border:1px solid var(--mc-line,#ffffff24);color:var(--mc-text-muted,#aaa)}
+    .pending{border-color:color-mix(in srgb,var(--mc-warn,#f0b84a) 50%,transparent)} #message{min-height:22px;margin-top:12px;white-space:pre-wrap;color:var(--mc-text-muted,#aaa)} .empty{padding:24px;text-align:center;color:var(--mc-text-muted,#aaa)}
+    @media(max-width:760px){.grid{grid-template-columns:1fr 1fr}} @media(max-width:480px){main{padding:20px 14px 50px}.grid{grid-template-columns:1fr}}
+  </style>
+</head>
+<body><main>
+  <h1>豆瓣将映</h1><div class="muted">自动追踪即将开播剧集。达到想看阈值后会尝试订阅，开播前只提醒一次。</div>
+  <h2>监控设置</h2><section class="panel"><div class="row">
+    <label>RSSHub 地址<input id="rsshub"></label><label>排序<select id="sort"><option value="hot">热度</option><option value="time">时间</option></select></label>
+    <label>抓取数量<input id="count" type="number" min="1" max="100"></label><label>想看阈值<input id="threshold" type="number" min="0"></label>
+    <label>提前订阅天数<input id="days" type="number" min="0" max="90"></label><label>提前提醒小时<input id="hours" type="number" min="0" max="720"></label>
+  </div><div class="row" style="margin-top:16px"><button id="run" class="primary">立即刷新</button><span id="summary" class="muted"></span></div><div id="message"></div></section>
+  <h2>最近追踪</h2><section id="history" class="grid"></section>
+</main><script>
+const api="/api/v1/plugins/douban-coming-notice";
+const headers=()=>({"Content-Type":"application/json","Accept-Language":document.documentElement.lang||"zh-Hans"});
+async function request(path,options={}){const r=await fetch(api+path,{credentials:"same-origin",...options,headers:{...headers(),...(options.headers||{})}});const j=await r.json().catch(()=>({}));if(!r.ok)throw new Error(j.detail||j.message||`请求失败 (${r.status})`);return j.data??j}
+function el(tag,cls,text){const n=document.createElement(tag);if(cls)n.className=cls;if(text!==undefined)n.textContent=text;return n}
+function payload(){return{rsshub:document.getElementById("rsshub").value.trim(),sort_by:document.getElementById("sort").value,count:+document.getElementById("count").value,wish_count_threshold:+document.getElementById("threshold").value,advance_days:+document.getElementById("days").value,notify_before_air:true,notify_hours:+document.getElementById("hours").value,enabled:true}}
+function render(rows,pending){const box=document.getElementById("history");box.replaceChildren();if(!rows?.length){box.append(el("div","panel empty","还没有追踪记录。点击“立即刷新”开始。"));return}for(const row of rows){const card=el("article",`card${pending?.[row.unique]?" pending":""}`);if(row.poster_url){const img=el("img","poster");img.src=row.poster_url;img.alt=`${row.title} 海报`;card.append(img)}else card.append(el("div","poster"));const body=el("div","body");body.append(el("div","title",row.title||row.original_title||"未命名"));const meta=el("div","meta");meta.append(el("span","chip",`想看 ${row.wish_count||0}`),el("span","chip",row.air_date?`开播 ${row.air_date}`:"开播日期待定"),el("span","chip",row.subscribed?"已订阅":row.status==="pending"?"待确认":"未订阅"));body.append(meta);if(pending?.[row.unique])body.append(el("div","muted",pending[row.unique].reason||"等待确认"));card.append(body);box.append(card)}}
+async function load(){const d=await request("/report");const s=d.settings||{};document.getElementById("rsshub").value=s.rsshub||"https://rsshub.ddsrem.com";document.getElementById("sort").value=s.sort_by||"hot";document.getElementById("count").value=s.count||10;document.getElementById("threshold").value=s.wish_count_threshold??5000;document.getElementById("days").value=s.advance_days??7;document.getElementById("hours").value=s.notify_hours??24;const x=d.summary||{};document.getElementById("summary").textContent=x.last_time?`上次：${x.last_time} · 待确认 ${x.pending_count||0}`:"";render(d.history||[],d.pending||{})}
+document.getElementById("run").onclick=async()=>{const b=document.getElementById("run"),m=document.getElementById("message");b.disabled=true;m.textContent="正在抓取和处理，请稍候…";try{const d=await request("/refresh",{method:"POST",body:JSON.stringify(payload())});m.textContent=`处理完成，待确认 ${Object.keys(d.pending||{}).length} 条`;await load()}catch(e){m.textContent=e.message}finally{b.disabled=false}};
+load().catch(e=>document.getElementById("message").textContent=e.message);
+</script></body></html>

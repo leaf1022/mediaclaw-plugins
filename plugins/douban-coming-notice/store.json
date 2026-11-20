@@ -1,0 +1,12 @@
+{
+  "author": "MediaClaw",
+  "author_url": "https://github.com/leaf1022",
+  "license": "MIT",
+  "origin": "official",
+  "summary": "追踪豆瓣即将开播剧集，自动订阅并发送开播提醒。",
+  "homepage": "https://github.com/leaf1022/mediaclaw-plugins",
+  "issues_url": "https://github.com/leaf1022/mediaclaw-plugins/issues",
+  "category": "sites",
+  "icon": "icon.svg"
+}
+

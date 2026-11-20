@@ -1,0 +1,12 @@
+{
+  "author": "MediaClaw",
+  "author_url": "https://github.com/leaf1022",
+  "license": "MIT",
+  "origin": "official",
+  "summary": "为媒体库生成四种风格的横向封面，支持定时刷新。",
+  "homepage": "https://github.com/leaf1022/mediaclaw-plugins",
+  "issues_url": "https://github.com/leaf1022/mediaclaw-plugins/issues",
+  "category": "library",
+  "icon": "icon.svg"
+}
+

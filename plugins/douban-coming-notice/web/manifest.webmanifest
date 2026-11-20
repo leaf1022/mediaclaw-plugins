@@ -1,0 +1,15 @@
+{
+  "name": "豆瓣将映",
+  "name_localized": { "en": "Douban Coming Soon" },
+  "short_name": "豆瓣将映",
+  "short_name_localized": { "en": "Coming" },
+  "start_url": ".",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "monochrome"
+    }
+  ]
+}

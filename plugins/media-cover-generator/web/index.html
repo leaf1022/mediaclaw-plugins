@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="zh-Hans">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>媒体库封面生成</title>
+  <style>
+    :root { color-scheme: light dark; font-family: var(--mc-font, system-ui, sans-serif); color: var(--mc-text,#eee); }
+    * { box-sizing: border-box; }
+    body { margin: 0; background: transparent; }
+    main { max-width: 1120px; margin: auto; padding: 28px 20px 64px; }
+    h1 { margin: 0 0 6px; font-size: clamp(25px,4vw,38px); }
+    h2 { margin: 30px 0 12px; font-size: 18px; }
+    .muted { color: var(--mc-text-muted,#aaa); }
+    .panel { border: 1px solid var(--mc-line,#ffffff24); border-radius: 22px; background: color-mix(in srgb,var(--mc-surface,#111) 40%,transparent); backdrop-filter: blur(24px); padding: 20px; }
+    .row { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+    label { display: grid; gap: 7px; min-width: 210px; flex: 1; color: var(--mc-text-muted,#aaa); font-size: 13px; }
+    select, button { font: inherit; color: var(--mc-text,#eee); border: 1px solid var(--mc-line,#ffffff24); border-radius: 12px; background: color-mix(in srgb,var(--mc-surface,#222) 82%,transparent); padding: 11px 13px; }
+    button { cursor: pointer; }
+    button.primary { border-color: transparent; background: var(--mc-accent,#6f8cff); color: #fff; font-weight: 650; }
+    button:disabled { opacity: .55; cursor: wait; }
+    .styles { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 10px; margin-top: 15px; }
+    .style { text-align: left; padding: 14px; border-radius: 15px; }
+    .style.active { outline: 2px solid var(--mc-accent,#6f8cff); background: color-mix(in srgb,var(--mc-accent,#6f8cff) 15%,transparent); }
+    .style b { display: block; margin-bottom: 5px; }
+    .grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 14px; }
+    .card { overflow: hidden; border: 1px solid var(--mc-line,#ffffff24); border-radius: 18px; background: color-mix(in srgb,var(--mc-surface,#111) 45%,transparent); }
+    .cover { width: 100%; aspect-ratio: 21/10; object-fit: cover; display: block; background: color-mix(in srgb,var(--mc-text,#fff) 8%,transparent); }
+    .card-body { padding: 13px 14px 15px; }
+    .card-title { font-weight: 650; }
+    .chip { display: inline-block; margin-top: 8px; padding: 3px 8px; border-radius: 99px; font-size: 12px; color: var(--mc-text-muted,#aaa); border: 1px solid var(--mc-line,#ffffff24); }
+    .empty { padding: 24px; text-align: center; color: var(--mc-text-muted,#aaa); }
+    #message { min-height: 22px; margin: 12px 0; white-space: pre-wrap; color: var(--mc-text-muted,#aaa); }
+    @media (max-width: 760px) { .grid { grid-template-columns: 1fr 1fr; } .styles { grid-template-columns: 1fr 1fr; } }
+    @media (max-width: 480px) { main { padding: 20px 14px 50px; } .grid, .styles { grid-template-columns: 1fr; } }
+  </style>
+</head>
+<body>
+<main>
+  <h1>媒体库封面</h1>
+  <div class="muted">选择媒体库和风格后立即生成，定时任务也会按这里的设置刷新。手动上传的封面不会被覆盖。</div>
+  <h2>生成设置</h2>
+  <section class="panel">
+    <div class="row">
+      <label>媒体库
+        <select id="library"><option value="">全部媒体库</option></select>
+      </label>
+      <label>执行状态
+        <select id="enabled"><option value="true">启用定时刷新</option><option value="false">暂停定时刷新</option></select>
+      </label>
+    </div>
+    <div id="styles" class="styles"></div>
+    <div class="row" style="margin-top:16px">
+      <button id="run" class="primary">立即生成</button>
+      <span id="summary" class="muted"></span>
+    </div>
+    <div id="message" role="status"></div>
+  </section>
+  <h2>最近生成</h2>
+  <section id="history" class="grid"></section>
+</main>
+<script>
+const api = "/api/v1/plugins/media-cover-generator";
+let state = { settings:{}, libraries:[], styles:[], style:"static_1" };
+const headers = () => ({ "Content-Type":"application/json", "Accept-Language":document.documentElement.lang || "zh-Hans" });
+async function request(path, options={}) {
+  const response = await fetch(api + path, { credentials:"same-origin", ...options, headers:{...headers(), ...(options.headers||{})} });
+  const body = await response.json().catch(() => ({}));
+  if (!response.ok) throw new Error(body.detail || body.message || `请求失败 (${response.status})`);
+  return body.data ?? body;
+}
+function el(tag, className, text) { const node=document.createElement(tag); if(className) node.className=className; if(text!==undefined) node.textContent=text; return node; }
+function renderStyles() {
+  const box = document.getElementById("styles"); box.replaceChildren();
+  for (const style of state.styles) {
+    const button=el("button",`style${style.id===state.style?" active":""}`);
+    button.append(el("b","",style.label),el("span","muted",style.id));
+    button.onclick=()=>{ state.style=style.id; renderStyles(); };
+    box.append(button);
+  }
+}
+function renderHistory(rows) {
+  const box=document.getElementById("history"); box.replaceChildren();
+  if(!rows?.length){ box.append(el("div","panel empty","还没有生成记录。点击“立即生成”后会出现在这里。")); return; }
+  for(const row of rows){
+    const card=el("article","card");
+    if(row.cover_url){ const img=el("img","cover"); img.src=row.cover_url; img.alt=`${row.title} 封面`; card.append(img); }
+    else card.append(el("div","cover"));
+    const body=el("div","card-body");
+    body.append(el("div","card-title",row.title||`媒体库 #${row.library_id}`),el("div","muted",`${row.style_label||row.style} · ${row.time||""}`));
+    if(row.reason) body.append(el("div","muted",row.reason));
+    body.append(el("span","chip",`${row.item_count||0} 个条目`)); card.append(body); box.append(card);
+  }
+}
+async function load() {
+  const data=await request("/report");
+  state={...state,...data,style:data.settings?.style||"static_1"};
+  const select=document.getElementById("library"); select.replaceChildren(new Option("全部媒体库",""));
+  for(const lib of data.libraries||[]) select.append(new Option(`${lib.name} · ${lib.item_count} 个条目`,String(lib.id),false,String(lib.id)===String(data.settings?.library_id||"")));
+  document.getElementById("enabled").value=String(data.settings?.enabled!==false);
+  const summary=data.summary||{}; document.getElementById("summary").textContent=summary.last_time?`上次：${summary.last_time} · 生成 ${summary.generated_count||0} 个`:"";
+  renderStyles(); renderHistory(data.history||[]);
+}
+function payload(){
+  const library=document.getElementById("library").value;
+  return { library_id:library?Number(library):null, include_libraries:library?[Number(library)]:[], style:state.style, enabled:document.getElementById("enabled").value==="true" };
+}
+document.getElementById("run").onclick=async()=>{
+  const button=document.getElementById("run"), message=document.getElementById("message"); button.disabled=true; message.textContent="正在生成，请稍候…";
+  try { const result=await request("/generate",{method:"POST",body:JSON.stringify(payload())}); const skipped=result.skipped||[]; message.textContent=`已生成 ${result.generated?.length||0} 个${skipped.length?`，跳过 ${skipped.length} 个：${skipped.map(x=>x.reason).join("；")}`:""}`; await load(); }
+  catch(error){ message.textContent=error.message; }
+  finally { button.disabled=false; }
+};
+document.getElementById("enabled").onchange=async()=>{ try{ await request("/settings",{method:"PUT",body:JSON.stringify(payload())}); }catch(error){ document.getElementById("message").textContent=error.message; } };
+load().catch(error=>document.getElementById("message").textContent=error.message);
+</script>
+</body>
+</html>

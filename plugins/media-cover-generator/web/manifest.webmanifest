@@ -1,0 +1,15 @@
+{
+  "name": "媒体库封面生成",
+  "name_localized": { "en": "Library Cover Generator" },
+  "short_name": "封面生成",
+  "short_name_localized": { "en": "Covers" },
+  "start_url": ".",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "monochrome"
+    }
+  ]
+}

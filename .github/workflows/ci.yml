@@ -1,0 +1,226 @@
+# Pull requests: schema-check the catalog, and run MediaClaw's Manifest /
+# check_compat (via the plugin-dev check_plugin.py) on changed plugin
+# directories, example/hello-note, and the reference copies listed in
+# example/UPSTREAM.json. Those copies pass check_plugin.py against
+# MEDIACLAW_REF (exit 0; warnings are not failures). Their tests are not
+# in the tree — they do not run standalone — so the unittest step below
+# sees no tests/ directory and skips them. A README-only change skips the
+# MediaClaw install.
+#
+# Plugins with a [dependencies] lock file also go through MediaClaw's lock
+# checker (pinned, exact versions, hashes, wheels only, no clash with the
+# packages the server ships) and a real hash-checked pip install inside the
+# server image's base (python:3.12-slim-bookworm) on linux/amd64 and
+# linux/arm64, so both architectures are known to have wheels. Those plugins
+# get the full check_plugin.py run in the lock-check job instead of the
+# validate job, because their tests need the locked packages installed.
+
+name: ci
+
+on:
+  pull_request:
+
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+env:
+  # MediaClaw v0.50.0: adds library.items.segments / library.segments.updated
+  # (needed by trim-media) and keeps playback stopped/completed contracts 1.1
+  # (leaf1022/mediaclaw#1063) required by trakt-sync 0.3.0.
+  # Do not float this to a branch tip.
+  MEDIACLAW_REF: 84095893f6d09057a25cf138d3c1099d8bd9851f
+  # Shipped with every server release from the one after v0.39.0.
+  HOST_CONSTRAINTS_URL: https://github.com/leaf1022/mediaclaw/releases/latest/download/host-constraints.txt
+
+jobs:
+  catalog:
+    name: catalog
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          # every tag: each version in the index is read back from its own tag
+          fetch-depth: 0
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Lint plugins, check index.json, run script tests
+        run: |
+          set -euo pipefail
+          python3 -m pip install jsonschema pyyaml
+          python3 scripts/generate_index.py --lint
+          python3 -m unittest discover -s scripts/tests -t scripts -v
+          python3 scripts/generate_index.py --check index.json
+
+  changes:
+    name: changes
+    runs-on: ubuntu-latest
+    outputs:
+      run: ${{ steps.pick.outputs.run }}
+      dirs: ${{ steps.pick.outputs.dirs }}
+      locks: ${{ steps.pick.outputs.locks }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Select plugin directories
+        id: pick
+        env:
+          BASE_SHA: ${{ github.event.pull_request.base.sha }}
+        run: python3 scripts/ci_dirs.py
+
+  validate:
+    name: validate
+    needs: changes
+    if: needs.changes.outputs.run == 'true'
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checkout MediaClaw
+        uses: actions/checkout@v4
+        with:
+          repository: leaf1022/mediaclaw
+          ref: ${{ env.MEDIACLAW_REF }}
+          path: .mediaclaw
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: .mediaclaw/pyproject.toml
+
+      - name: Install pinned MediaClaw
+        run: python3 -m pip install -e .mediaclaw
+
+      - name: Manifest, check_compat, and plugin tests
+        env:
+          DIRS: ${{ needs.changes.outputs.dirs }}
+          LOCKS: ${{ needs.changes.outputs.locks }}
+        run: |
+          set -euo pipefail
+          if [ -z "$DIRS" ]; then
+            echo "没有要校验的插件目录" >&2
+            exit 1
+          fi
+          read -r -a dirs <<< "$DIRS"
+          checker=".mediaclaw/src/mediaclaw_agent/builtin-skills/mediaclaw-plugin-dev/scripts/check_plugin.py"
+          for dir in "${dirs[@]}"; do
+            if [[ " $LOCKS " == *" ${dir}/"* ]]; then
+              echo "${dir} 声明了 [dependencies]，由 dependencies (lock check) 用新版检查器校验"
+              continue
+            fi
+            echo "::group::${dir}"
+            python3 "$checker" "$dir"
+            # Reference copies under example/<id>/ (UPSTREAM.json) have no
+            # tests/ on purpose. Do not point this at MediaClaw's own tests/.
+            if [ -f "${dir}/pytest.ini" ]; then
+              python3 -m pip install 'pytest>=8.4,<9' 'pytest-asyncio>=1.1,<2'
+              python3 -m pytest -c "${dir}/pytest.ini" "${dir}/tests" -v
+            elif [ -d "${dir}/tests" ]; then
+              python3 -m unittest discover -s "${dir}/tests" -t "$dir" -v
+            fi
+            echo "::endgroup::"
+          done
+
+  dependencies:
+    name: dependencies (lock check)
+    needs: changes
+    if: needs.changes.outputs.locks != ''
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Checkout MediaClaw
+        uses: actions/checkout@v4
+        with:
+          repository: leaf1022/mediaclaw
+          ref: ${{ env.MEDIACLAW_REF }}
+          path: .mediaclaw
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: .mediaclaw/pyproject.toml
+
+      - name: Install MediaClaw (lock checker)
+        run: python3 -m pip install -e .mediaclaw
+
+      - name: Fetch host-constraints.txt from the latest server release
+        run: |
+          set -euo pipefail
+          if ! curl -fsSL "$HOST_CONSTRAINTS_URL" -o host-constraints.txt; then
+            echo "::warning::最新服务器 Release 还没有 host-constraints.txt，改用 MEDIACLAW_REF 环境里的包"
+            python3 -m mediaclaw_sdk.deps constraints > host-constraints.txt
+          fi
+          grep -q '^httpx==' host-constraints.txt
+
+      - name: Lock files, Manifest, check_compat, and plugin tests
+        env:
+          LOCKS: ${{ needs.changes.outputs.locks }}
+        run: |
+          set -euo pipefail
+          read -r -a locks <<< "$LOCKS"
+          checker=".mediaclaw/src/mediaclaw_agent/builtin-skills/mediaclaw-plugin-dev/scripts/check_plugin.py"
+          for lock in "${locks[@]}"; do
+            dir="$(dirname "$lock")"
+            echo "::group::${dir}"
+            python3 -m mediaclaw_sdk.deps check "$dir" --constraints host-constraints.txt
+            python3 "$checker" "$dir"
+            if [ -d "${dir}/tests" ]; then
+              # The plugin's locked packages, for its own tests only. Keep them
+              # off the checker's path: it would count them as host packages.
+              deps_dir="$(mktemp -d)"
+              python3 -m pip install --disable-pip-version-check --quiet --target "$deps_dir" \
+                --require-hashes --only-binary=:all: --no-deps -r "$lock"
+              PYTHONPATH="$deps_dir" python3 -m unittest discover -s "${dir}/tests" -t "$dir" -v
+            fi
+            echo "::endgroup::"
+          done
+
+  dependencies-install:
+    name: dependencies (${{ matrix.platform }})
+    needs: changes
+    if: needs.changes.outputs.locks != ''
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - platform: linux/amd64
+            runner: ubuntu-latest
+          - platform: linux/arm64
+            runner: ubuntu-24.04-arm
+    runs-on: ${{ matrix.runner }}
+    # Same Python and glibc as the server image, so pip picks what users get.
+    container: python:3.12-slim-bookworm
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install every lock file with pip, hash-checked, wheels only
+        shell: bash
+        env:
+          LOCKS: ${{ needs.changes.outputs.locks }}
+        run: |
+          set -euo pipefail
+          uname -m
+          read -r -a locks <<< "$LOCKS"
+          for lock in "${locks[@]}"; do
+            echo "::group::${lock}"
+            target="$(mktemp -d)"
+            python3 -m pip install --disable-pip-version-check --no-cache-dir --root-user-action=ignore \
+              --target "$target" --require-hashes --only-binary=:all: --no-deps \
+              -r "$lock"
+            rm -rf "$target"
+            echo "::endgroup::"
+          done

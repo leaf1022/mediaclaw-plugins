@@ -1,0 +1,37 @@
+[plugin]
+id = "douban-coming-notice"
+title = "豆瓣将映"
+version = "1.1.0"
+entry = "douban_coming_notice"
+runtime = "process"
+sdk = "^1.0"
+description = "监控豆瓣即将开播的剧集，筛选想看人数，临近开播自动订阅并发送一次提醒。"
+title_localized = { en = "Douban Coming Soon" }
+description_localized = { en = "Track upcoming Douban shows, filter by wish count, auto-subscribe near release and send one airing reminder." }
+
+[requires]
+"scheduled-tasks" = "^1.1"
+"plugin-data" = "^1.0"
+"plugin-routes" = "^1.0"
+"plugin-events" = "^1.0"
+
+[permissions]
+operations = [
+  "search.titles",
+  "discover.get-title-details",
+  "subscriptions.create",
+]
+network = true
+
+[[events]]
+name = "douban-coming-notice.airing"
+title = "豆瓣开播提醒"
+
+[[notifications]]
+event = "douban-coming-notice.airing"
+title = "📺 {title} 即将开播"
+body = "开播时间：{air_date}"
+audience = "admins"
+level = "active"
+default = true
+open = "plugin"
