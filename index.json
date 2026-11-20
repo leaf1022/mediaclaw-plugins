@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "generated_at": "2026-11-20T16:49:04Z",
+  "generated_at": "2026-11-20T16:49:41Z",
   "signed": true,
   "key_id": "catalog-mediaclaw",
   "repository": "https://github.com/leaf1022/mediaclaw-plugins",
@@ -1057,6 +1057,93 @@
               "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/movie-voice-v0.2.1/movie-voice-0.2.1.mcplugin",
               "sha256": "26fa65b57bf4d9da9c067ce6824357da82ab92620e525b287cd5f1144b7fc589",
               "size": 168349
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "notifyhub",
+      "name": "企业微信直推",
+      "summary": "企业微信自建应用直推，支持入库、播放、上传文件名和中文模板。",
+      "description": "直连企业微信自建应用，支持海报图文、文本卡片和 Jinja2 中文模板，补充评分、类型、演员及简介。",
+      "category": "messaging",
+      "author": {
+        "name": "Migflyway",
+        "url": "https://github.com/Migflyway"
+      },
+      "homepage": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/notifyhub",
+      "repository": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/notifyhub",
+      "license": "见仓库许可证",
+      "origin": "official",
+      "icon": null,
+      "screenshots": [],
+      "deprecated": null,
+      "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues/new?template=plugin-feedback.yml&plugin=notifyhub",
+      "downloads": 0,
+      "latest": "2.3.0",
+      "latest_stable": "2.3.0",
+      "versions": [
+        {
+          "version": "2.3.0",
+          "prerelease": false,
+          "released_at": "2026-11-20T16:49:41Z",
+          "yanked": null,
+          "notes": "- 企业微信自建应用直推，支持图文、文本卡片和中文 Jinja2 模板。\n- 订阅、下载、整理入库、媒体库新增、洗版、播放及系统通道告警。\n- 新增媒体默认合并 5 秒后处理，持续入账最多等待 15 秒开始处理；首次扫描和大批量事件保留汇总兜底。\n- 上传任务完成时显示确认成功的文件名及上传/秒传统计；部分失败单独标明。\n- 去重记录分片存储，每个值最多 32 KiB，修复超过 64 KB 后的重复投递。\n- 电影隐藏季集，电视剧合并新增集数；图片统一使用 MediaClaw 访问地址。\n- 保留 notifyhub ID，供已有用户继续升级并沿用设置。\n",
+          "changelog_url": "https://github.com/leaf1022/mediaclaw-plugins/releases/tag/notifyhub-v2.3.0",
+          "source_url": "https://github.com/leaf1022/mediaclaw-plugins/tree/notifyhub-v2.3.0/plugins/notifyhub",
+          "readme": {
+            "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/notifyhub-v2.3.0/plugins/notifyhub/README.md",
+            "sha256": "e0274f68ce15c49818f33b3b4af526e7cf42cfcd92c7f2fc460af33607c2538c",
+            "size": 5064
+          },
+          "runtime": "process",
+          "sdk": "^1.0",
+          "requires": {
+            "plugin-data": "^1.0",
+            "kernel/durable-events": "^1.0",
+            "plugin-callbacks": "^1.0",
+            "plugin-routes": "^1.0",
+            "im-channels": "^1.0",
+            "host-ops": "^1.0",
+            "subscription.created": "^2.0",
+            "subscription.download_started": "^1.0",
+            "subscription.fulfilled": "^2.0",
+            "subscription.upgraded": "^1.0",
+            "download.completed": "^2.0",
+            "library.ingest.completed": "^1.0",
+            "library.items.arrived": "^1.0",
+            "library.files.added": "^2.0"
+          },
+          "platforms": [
+            "any"
+          ],
+          "permissions": {
+            "operations": [
+              "discover.get-title-details",
+              "library.items.get",
+              "subscriptions.get",
+              "members.show",
+              "jobs.list",
+              "jobs.events",
+              "library.list"
+            ],
+            "paths": [],
+            "network": true,
+            "callbacks": [
+              "playback"
+            ],
+            "events": []
+          },
+          "web": false,
+          "dependencies": null,
+          "artifacts": [
+            {
+              "platform": "any",
+              "filename": "notifyhub-2.3.0.mcplugin",
+              "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/notifyhub-v2.3.0/notifyhub-2.3.0.mcplugin",
+              "sha256": "c8511f1bb680078173fded994802879eab7ba2dd65b5c247587f69e1e709a135",
+              "size": 190357
             }
           ]
         }
