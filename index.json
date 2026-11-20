@@ -1,6 +1,6 @@
 {
   "schema": 2,
-  "generated_at": "2026-11-20T16:49:41Z",
+  "generated_at": "2026-11-20T16:50:19Z",
   "signed": true,
   "key_id": "catalog-mediaclaw",
   "repository": "https://github.com/leaf1022/mediaclaw-plugins",
@@ -1144,6 +1144,70 @@
               "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/notifyhub-v2.3.0/notifyhub-2.3.0.mcplugin",
               "sha256": "c8511f1bb680078173fded994802879eab7ba2dd65b5c247587f69e1e709a135",
               "size": 190357
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "openlist-direct-link",
+      "name": "OpenList 直链",
+      "summary": "挂载路径的 strm 借 OpenList 换出网盘直链，播放器 302 直连网盘，视频流量不经服务器。",
+      "description": "strm 指向 CloudDrive2 / rclone 挂载里的文件时，借 OpenList 换出网盘直链，播放器直接从网盘取，视频流量不经过服务器。",
+      "category": "storage",
+      "author": {
+        "name": "MediaClaw",
+        "url": "https://github.com/leaf1022"
+      },
+      "homepage": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/openlist-direct-link",
+      "repository": "https://github.com/leaf1022/mediaclaw-plugins/tree/main/plugins/openlist-direct-link",
+      "license": "见仓库许可证",
+      "origin": "official",
+      "icon": null,
+      "screenshots": [],
+      "deprecated": null,
+      "feedback_url": "https://github.com/leaf1022/mediaclaw-plugins/issues/new?template=plugin-feedback.yml&plugin=openlist-direct-link",
+      "downloads": 0,
+      "latest": "0.1.0",
+      "latest_stable": "0.1.0",
+      "versions": [
+        {
+          "version": "0.1.0",
+          "prerelease": false,
+          "released_at": "2026-11-20T16:50:19Z",
+          "yanked": null,
+          "notes": "- 首次发布。strm 指向网盘挂载里的文件时，按路径规则换成 OpenList 路径，交出 OpenList 的签名下载地址；MediaClaw 带着播放器的 User-Agent 跟到网盘 CDN，再把播放器 302 过去。\n",
+          "changelog_url": "https://github.com/leaf1022/mediaclaw-plugins/releases/tag/openlist-direct-link-v0.1.0",
+          "source_url": "https://github.com/leaf1022/mediaclaw-plugins/tree/openlist-direct-link-v0.1.0/plugins/openlist-direct-link",
+          "readme": {
+            "url": "https://raw.githubusercontent.com/leaf1022/mediaclaw-plugins/openlist-direct-link-v0.1.0/plugins/openlist-direct-link/README.md",
+            "sha256": "5c92816488ee87364c1a97edad6b7d763303da10adb3c548e08cbc3a667ce8f6",
+            "size": 1395
+          },
+          "runtime": "process",
+          "sdk": "^1.0",
+          "requires": {
+            "playback.strm.direct-link": "^1.0"
+          },
+          "platforms": [
+            "any"
+          ],
+          "permissions": {
+            "operations": [],
+            "paths": [],
+            "network": true,
+            "callbacks": [],
+            "events": []
+          },
+          "web": false,
+          "dependencies": null,
+          "artifacts": [
+            {
+              "platform": "any",
+              "filename": "openlist-direct-link-0.1.0.mcplugin",
+              "url": "https://github.com/leaf1022/mediaclaw-plugins/releases/download/openlist-direct-link-v0.1.0/openlist-direct-link-0.1.0.mcplugin",
+              "sha256": "5fb3dbf6e7c6efdf9b99a91b3087eaef07bd1352f2e500f6ff57f617b2240e4e",
+              "size": 6751
             }
           ]
         }
