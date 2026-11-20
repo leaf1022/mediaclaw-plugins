@@ -44,7 +44,11 @@ jobs:
           set -euo pipefail
           python3 -m pip install jsonschema pyyaml
           python3 scripts/generate_index.py --lint
-          python3 -m unittest discover -s scripts/tests -t scripts -v
+          if [ -d scripts/tests ]; then
+            python3 -m unittest discover -s scripts/tests -t scripts -v
+          else
+            echo "scripts/tests 不存在，跳过仓库脚本测试"
+          fi
           python3 scripts/generate_index.py --check index.json
 
   changes:
@@ -70,13 +74,17 @@ jobs:
     needs: changes
     if: needs.changes.outputs.run == 'true'
     runs-on: ubuntu-latest
+    # 插件测试要导入宿主 SDK、宿主已安装依赖和媒体处理模块。直接使用公开的
+    # MediaClaw 运行镜像，避免公共插件仓库的 CI 依赖私有主仓库源码或令牌。
+    container:
+      image: leaf1022/mediaclaw:v0.51.0
+      options: --user root
+    defaults:
+      run:
+        shell: bash
     timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
 
       - name: MediaClaw format check and plugin tests
         env:
@@ -113,13 +121,15 @@ jobs:
     needs: changes
     if: needs.changes.outputs.locks != ''
     runs-on: ubuntu-latest
+    container:
+      image: leaf1022/mediaclaw:v0.51.0
+      options: --user root
+    defaults:
+      run:
+        shell: bash
     timeout-minutes: 30
     steps:
       - uses: actions/checkout@v4
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: "3.12"
 
       - name: Lock files, MediaClaw format check, and plugin tests
         env:
@@ -138,7 +148,7 @@ jobs:
               deps_dir="$(mktemp -d)"
               python3 -m pip install --disable-pip-version-check --quiet --target "$deps_dir" \
                 --require-hashes --only-binary=:all: --no-deps -r "$lock"
-              PYTHONPATH="$deps_dir" python3 -m unittest discover -s "${dir}/tests" -t "$dir" -v
+              PYTHONPATH="$deps_dir:/app/src" python3 -m unittest discover -s "${dir}/tests" -t "$dir" -v
             fi
             echo "::endgroup::"
           done

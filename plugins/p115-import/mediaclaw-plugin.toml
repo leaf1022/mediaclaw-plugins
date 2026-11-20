@@ -1,0 +1,48 @@
+[plugin]
+id = "p115-import"
+title = "115 分享转存入库"
+version = "0.4.14"
+entry = "p115_import"
+runtime = "process"
+sdk = "^1.1"
+description = "适配 MediaClaw v0.44：链接持久受理、复用原生识别/分库/命名/季集仲裁，转存后仅扫描本次作品网盘目录并逐文件核验。命名与显示语言分离；网页批量异名改名、按目标目录分组批量移动，分块后按文件编号核验并保存逐文件检查点；短查询自适应节流。保持同集体积最大规则，旧文件先保留，预览具体路径并独立确认后才清理。支持取消、检查点续跑、候选确认与空暂存清理；侧栏提供115入库工作台。"
+
+[requires]
+"host-ops" = "^1.0"
+"plugin-data" = "^1.0"
+"plugin-files" = "^1.0"
+"plugin-routes" = "^1.0"
+"plugin-jobs" = "^1.0"
+"plugin-events" = "^1.0"
+"job-handlers" = "^1.1"
+
+[permissions]
+operations = [
+  "dl.resolve-target",
+  "discover.get-title-details",
+  "library.list",
+  "library.items.get",
+  "library.scan.start",
+  "library.items.delete-file",
+  "jobs.show",
+  "jobs.list",
+  "jobs.retry",
+  "jobs.cancel",
+  "scrape.show",
+]
+paths = [{ path = "/app/models/torrent-ner", mode = "read" }]
+network = true
+
+[[events]]
+name = "p115-import.notice"
+title = "115 转存进度"
+
+[[notifications]]
+event = "p115-import.notice"
+title = "115 转存通知"
+body = "{message}"
+audience = "admins"
+default = true
+level = "active"
+open = "plugin"
+description = "发送已勾选通知的 115 转存进度、需要处理和处理结果。"

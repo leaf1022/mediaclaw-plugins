@@ -12,29 +12,28 @@ https://github.com/leaf1022/mediaclaw-plugins/releases/download/catalog/index.js
 
 | 插件 | 分类 | 说明 |
 | --- | --- | --- |
-| `media-cover-generator` | 媒体库 | 生成四种风格的媒体库横向封面，支持定时刷新 |
-| `douban-coming-notice` | 订阅 | 追踪豆瓣即将开播剧集，支持自动订阅和开播提醒 |
-
-## 开发与发版
-
-插件目录采用 schema 2 格式：
-
-```text
-plugins/<id>/
-├── mediaclaw-plugin.toml
-├── store.json
-├── CHANGELOG.md
-├── icon.svg
-├── web/
-└── <entry>.py
-```
-
-本地校验：
-
-```bash
-python3 scripts/generate_index.py --lint
-python3 scripts/pack.py plugins/<id> --output dist/<id>-<version>.mcplugin
-```
-
-发版 tag 使用 `<id>-v<version>`，标签版本必须与 `mediaclaw-plugin.toml` 和 `CHANGELOG.md` 一致。所有 Release 都使用 `--latest=false`。
-
+| `actor-avatar` | 媒体库 | 从 gfriends 头像库给本地视频库的演员补头像：只写 NFO 的 <thumb>，默认只预览，带台账与一键撤销。 |
+| `cast-cn` | 媒体库 | 用豆瓣补齐条目详情页演职员条的中文名、中文角色和头像，只改 NFO 并触发一次刷新。 |
+| `cloud-115` |  | 把 115 网盘接进媒体库：网盘里已有的片子直接看，新片自动上传、本地自动腾空。 |
+| `cloud-123` |  | 接入 123 云盘：扫码或 Token 登录、目录纳管、秒传与分片续传、原文件直链。 |
+| `douban-coming-notice` | 订阅 | 追踪豆瓣即将开播剧集，自动订阅并发送开播提醒。 |
+| `douban-hot-subscribe` | 媒体库 | 豆瓣热门榜单新进榜的片自动变订阅，季号自动选，可设评分与排除词。 |
+| `douban-rank-subscribe` | 工具 | 浏览豆瓣热门/口碑榜单并一键订阅，后台按榜单定期扫描自动追更 |
+| `douban-wish` | 媒体库 | 豆瓣点「想看」，自动变成 MediaClaw 订阅；剧集选季，歧义留给你定。 |
+| `mc-memory` | 工具 | 跨会话记忆 + 会话自动压缩二合一：沉淀长期记忆，上下文到阈值自动折叠省 token。 |
+| `media-cover-generator` | 媒体库 | 为媒体库生成四种风格的横向封面，支持定时刷新。 |
+| `movie-voice` | 工具 | Siri 语音找电影和剧集，纠正片名、核对库存，确认后观看或订阅。 |
+| `notifyhub` | 消息 | 企业微信自建应用直推，支持入库、播放、上传文件名和中文模板。 |
+| `openlist-direct-link` | 存储 | 挂载路径的 strm 借 OpenList 换出网盘直链，播放器 302 直连网盘，视频流量不经服务器。 |
+| `p115-import` | 媒体库 | 115 分享 / ed2k 转存入库：复用原生识别分库与批次季集，转存后范围扫描核验，带看板。 |
+| `p115-library` | 媒体库 | 115 网盘同步 STRM 媒体库，支持扫码登录、增量同步与剧集直链预取。 |
+| `platform-discovery` |  | 按账号同步片味的海报墙、媒体库录像厅和平台发现；支持库存播放入口、选季订阅、完整全屏屏保与有限海报缓存。 |
+| `playback-cleanup` | 媒体库 | 播放结束后自动清掉选定库、选定成员的续播进度，并从「接下来继续」隐藏（需新版宿主）；不动已看与收藏；默认只预览，可撤销。 |
+| `pt-keepalive` |  | PT 站点保活：借宿主登录态定时访问已配置站点、尝试签到、刷新最后活跃时间，凭据失效主动告警。 |
+| `pt-site-pack` | 站点 | 管理本站 PT 目录、自助适配和采集检查，汇总站点数据与任务，支持隐私分享及自动 P 龄。 |
+| `seed-hub` | 下载 | 自动转种 + IYUU 辅种 + 死种清理，保种三件事一个插件全管。 |
+| `seed-scheduler` | 下载 | 给下载器里的种子设做种时长，到点自动删任务；H&R 与订阅中的先留着。 |
+| `strategy-linkage` | 工具 | 按明确条件自动通知、移除种子或调整下载器全局设置 |
+| `trakt-sync` | 工具 | 播放、已看与收藏同步到各成员的 Trakt，支持确认后的双向历史同步 |
+| `tv-home` | 工具 | 把厂商桌面换成 MediaClaw 桌面：开机、按主页键直达 MediaClaw 首页。 |
+| `watch-friends` |  | 私人观影足迹、高清片单、多图推荐、本人跨平台已看与续播同步，以及独立授权的互联影友。 |
